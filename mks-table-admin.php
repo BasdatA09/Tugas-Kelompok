@@ -1,5 +1,8 @@
 <?php
 require_once 'database.php';
+if(!isset($_SESSION['role'])){
+	header('location: login.php');
+}
 
 if(isset($_POST["sort_admin"])){
 	$_SESSION["mks_order_admin"] = $_POST["sort_admin"];
