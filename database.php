@@ -33,7 +33,7 @@ class database
     }
 
     public function connectDB(){
-        $sql = "set search path to sisidang";
+        $sql = "set search_path to sisidang";
         try {
 
             $conn = new PDO("pgsql:host=" . $this->getDbhost() . ";port=" . $this->getDbport() . ";dbname=" . $this->getDbname() . ";user=" . $this->getUname() . ";password=" . $this->getPass());

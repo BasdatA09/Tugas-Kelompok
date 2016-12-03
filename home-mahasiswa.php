@@ -1,5 +1,13 @@
 <?php
 session_start();
+if(!isset($_SESSION['role'])){
+	header('location: login.php');
+}
+
+if($_SESSION['role'][0] != 'mahasiswa'){
+	echo '400 Bad Request';
+	die();
+}
 $npm = $_SESSION['role'][1];
 require_once 'database.php';
 

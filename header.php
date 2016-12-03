@@ -24,7 +24,7 @@ $role = $_SESSION['role'];
                         }
 					?>
 
-					<a class="navlink" href="jadwal-sidang.php">Lihat Jadwal Sidang</a>
+					<a class="navlink" href="lihat-jadwal-sidang.php">Lihat Jadwal Sidang</a>
 
 
                     <a id="logout" class="navlink" >Logout</a>
