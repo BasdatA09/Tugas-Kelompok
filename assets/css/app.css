@@ -236,6 +236,10 @@ table td button {
     margin: 0;
 }
 
+#calendar{
+    margin-bottom: 2em;
+}
+
 .adminHome .addScheduleButton {
     margin: 1rem 0;
     background: #283739;

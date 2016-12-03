@@ -39,4 +39,14 @@ $(document).ready(function() {
         "info" : false
     });
 
+    $('#jenis_sidang').click(function () {
+        $('#sort_js').click();
+    });
+    $('#mahasiswa').click(function () {
+        $('#sort_mhs').click();
+    });
+    $('#waktu').click(function () {
+        $('#sort_waktu').click();
+    });
+
 });
