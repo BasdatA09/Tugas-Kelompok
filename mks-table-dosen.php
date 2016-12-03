@@ -63,7 +63,6 @@ function get_table($nipdosen,$order)
 <!-- Schedule Table Module -->
 <div class="small-12 columns">
     <h1 class="subtitle">Daftar Mata Kuliah Spesial (dosen)</h1>
-    <button class="addScheduleButton" id="admAddScheduleButton" href="tambah-mks.php">Tambah</button>
 
     <form action="mata-kuliah-spesial.php" method="post">
     <select name='sort' onchange='if(this.value != 0) {this.form.submit();}'>

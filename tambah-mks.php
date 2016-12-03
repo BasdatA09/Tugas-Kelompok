@@ -45,7 +45,6 @@ function toDropDown($arr, $val, $name, $default, $label, $postname)
 	foreach ($arr as $key => $value) {
 		$select .= "<option value='" . $value[$val] . "'>" . $value[$name] . "</option>";
 	}
-
 	$select .= "</select>";
 	return $select;
 }
@@ -66,7 +65,7 @@ function toDropDown($arr, $val, $name, $default, $label, $postname)
 			<div class="small-12 columns">
 				<h1 class="subtitle">Tambah Data MKS</h1>
 			</div>
-			<form action="" method="">
+			<form action="server_tambah_mks.php" method="post">
 				<div class="small-12 columns">
 					<label>Term</label>
 					<?php echo toDropDown($termsarr,"2","1","Pilih Term","","term") ?>
