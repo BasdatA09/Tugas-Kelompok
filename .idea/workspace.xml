@@ -24,8 +24,8 @@
       <file leaf-file-name="home-dosen.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/home-dosen.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3004">
-              <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
+            <state relative-caret-position="3765">
+              <caret line="251" column="0" selection-start-line="251" selection-start-column="0" selection-end-line="251" selection-end-column="0" />
               <folding>
                 <marker date="1480763489000" expanded="true" signature="363:1051" ph="select * fro... mata_kuliah_spesial" />
                 <marker date="1480763489000" expanded="true" signature="363:1061" ph="select mks.i... mata_kuliah_spesial" />
@@ -385,12 +385,12 @@
       <workItem from="1479976135136" duration="4767000" />
       <workItem from="1480255489764" duration="13000" />
       <workItem from="1480435082674" duration="16000" />
-      <workItem from="1480518070503" duration="66257000" />
+      <workItem from="1480518070503" duration="66517000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71053000" />
+    <option name="totallyTimeSpent" value="71313000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
@@ -854,8 +854,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/home-dosen.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3004">
-          <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
+        <state relative-caret-position="3765">
+          <caret line="251" column="0" selection-start-line="251" selection-start-column="0" selection-end-line="251" selection-end-column="0" />
           <folding>
             <marker date="1480763489000" expanded="true" signature="363:1051" ph="select * fro... mata_kuliah_spesial" />
             <marker date="1480763489000" expanded="true" signature="363:1061" ph="select mks.i... mata_kuliah_spesial" />
