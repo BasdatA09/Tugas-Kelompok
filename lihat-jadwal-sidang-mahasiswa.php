@@ -104,3 +104,7 @@ function get_content($npm)
     </div>
 </div>
 </div>
+<?php include_once 'footer.php' ?>
+<?php include_once 'js.php' ?>
+</body>
+</html>
