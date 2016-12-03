@@ -36,6 +36,7 @@ $(document).ready(function() {
     $('.display').DataTable({
         "paging" : true,
         "ordering": false,
+        "bFilter": false,
         "info" : false
     });
 
