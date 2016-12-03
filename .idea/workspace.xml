@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f65ab90-4e6e-4be4-be56-7815ad7f9ba4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home-dosen.php" afterPath="$PROJECT_DIR$/home-dosen.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mata-kuliah-spesial.php" afterPath="$PROJECT_DIR$/mata-kuliah-spesial.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mks-table-admin.php" afterPath="$PROJECT_DIR$/mks-table-admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mks-table-dosen.php" afterPath="$PROJECT_DIR$/mks-table-dosen.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mks-table.php" afterPath="$PROJECT_DIR$/mks-table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server_tambah_mks.php" afterPath="$PROJECT_DIR$/server_tambah_mks.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tambah-mks.php" afterPath="$PROJECT_DIR$/tambah-mks.php" />
     </list>
     <ignored path="tugasakhirbasdat.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -133,23 +125,27 @@
       <file leaf-file-name="home-dosen.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/home-dosen.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="157" column="60" selection-start-line="157" selection-start-column="60" selection-end-line="157" selection-end-column="60" />
+            <state relative-caret-position="0">
+              <caret line="20" column="43" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
               <folding>
-                <marker date="1480778342000" expanded="true" signature="363:1080" ph="select mks.i... mata_kuliah_spesial" />
-                <marker date="1480778342000" expanded="true" signature="1872:2020" ph="..." />
-                <marker date="1480778342000" expanded="true" signature="1953:2020" ph="..." />
-                <marker date="1480778342000" expanded="true" signature="2090:2205" ph="Select count... dosen_pembimbing" />
-                <marker date="1480778342000" expanded="true" signature="2493:2602" ph="Select count... dosen_penguji" />
-                <marker date="1480778342000" expanded="true" signature="2988:3184" ph="..." />
-                <marker date="1480778342000" expanded="true" signature="3238:3373" ph="select d.nip... dosen_pembimbing" />
-                <marker date="1480778342000" expanded="true" signature="3798:3927" ph="select d.nip... dosen_penguji" />
-                <marker date="1480778342000" expanded="true" signature="7744:8256" ph="SELECT mks.i... mata_kuliah_spesial" />
-                <marker date="1480778342000" expanded="true" signature="8521:8927" ph="..." />
-                <marker date="1480778342000" expanded="true" signature="8555:8921" ph="{...}" />
-                <marker date="1480778342000" expanded="true" signature="8591:8921" ph="{&quot;defaultDate&quot;: \'EXTERNAL_FRAGMENT\'...}" />
-                <marker date="1480778342000" expanded="true" signature="8656:8796" ph="{&quot;left&quot;: \'prev,next today\'...}" />
-                <marker date="1480778342000" expanded="true" signature="8953:9466" ph="SELECT DISTI... mata_kuliah_spesial" />
+                <marker date="1480781181000" expanded="true" signature="361:392" ph="SELECT DISTI... mata_kuliah_spesial" />
+                <marker date="1480781181000" expanded="true" signature="361:1010" ph="SELECT DISTI... mata_kuliah_spesial" />
+                <marker date="1480781181000" expanded="true" signature="361:1011" ph="SELECT DISTI... mata_kuliah_spesial" />
+                <marker date="1480781181000" expanded="true" signature="1041:1758" ph="select mks.i... mata_kuliah_spesial" />
+                <marker date="1480781181000" expanded="true" signature="1797:2377" ph="SELECT DISTI... jadwal_sidang" />
+                <marker date="1480781181000" expanded="true" signature="2572:2720" ph="..." />
+                <marker date="1480781181000" expanded="true" signature="2653:2720" ph="..." />
+                <marker date="1480781181000" expanded="true" signature="2790:2905" ph="Select count... dosen_pembimbing" />
+                <marker date="1480781181000" expanded="true" signature="3193:3302" ph="Select count... dosen_penguji" />
+                <marker date="1480781181000" expanded="true" signature="3688:3884" ph="..." />
+                <marker date="1480781181000" expanded="true" signature="3938:4073" ph="select d.nip... dosen_pembimbing" />
+                <marker date="1480781181000" expanded="true" signature="4498:4627" ph="select d.nip... dosen_penguji" />
+                <marker date="1480781181000" expanded="true" signature="8444:8956" ph="SELECT mks.i... mata_kuliah_spesial" />
+                <marker date="1480781181000" expanded="true" signature="9221:9627" ph="..." />
+                <marker date="1480781181000" expanded="true" signature="9255:9621" ph="{...}" />
+                <marker date="1480781181000" expanded="true" signature="9291:9621" ph="{&quot;defaultDate&quot;: \'EXTERNAL_FRAGMENT\'...}" />
+                <marker date="1480781181000" expanded="true" signature="9356:9496" ph="{&quot;left&quot;: \'prev,next today\'...}" />
+                <marker date="1480781181000" expanded="true" signature="9653:10166" ph="SELECT DISTI... mata_kuliah_spesial" />
               </folding>
             </state>
           </provider>
@@ -365,7 +361,7 @@
       <workItem from="1480435082674" duration="16000" />
       <workItem from="1480518070503" duration="44008000" />
       <workItem from="1480753013328" duration="14850000" />
-      <workItem from="1480776516725" duration="1232000" />
+      <workItem from="1480776516725" duration="2384000" />
     </task>
     <task id="LOCAL-00001" summary="add mks-table-dosen">
       <created>1480753236684</created>
@@ -392,7 +388,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64886000" />
+    <option name="totallyTimeSpent" value="66038000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
@@ -486,20 +482,24 @@
         <state relative-caret-position="340">
           <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
           <folding>
-            <marker date="1480778342000" expanded="true" signature="363:1080" ph="select mks.i... mata_kuliah_spesial" />
-            <marker date="1480778342000" expanded="true" signature="1872:2020" ph="..." />
-            <marker date="1480778342000" expanded="true" signature="1953:2020" ph="..." />
-            <marker date="1480778342000" expanded="true" signature="2090:2205" ph="Select count... dosen_pembimbing" />
-            <marker date="1480778342000" expanded="true" signature="2493:2602" ph="Select count... dosen_penguji" />
-            <marker date="1480778342000" expanded="true" signature="2988:3184" ph="..." />
-            <marker date="1480778342000" expanded="true" signature="3238:3373" ph="select d.nip... dosen_pembimbing" />
-            <marker date="1480778342000" expanded="true" signature="3798:3927" ph="select d.nip... dosen_penguji" />
-            <marker date="1480778342000" expanded="true" signature="7744:8256" ph="SELECT mks.i... mata_kuliah_spesial" />
-            <marker date="1480778342000" expanded="true" signature="8521:8927" ph="..." />
-            <marker date="1480778342000" expanded="true" signature="8555:8921" ph="{...}" />
-            <marker date="1480778342000" expanded="true" signature="8591:8921" ph="{&quot;defaultDate&quot;: \'EXTERNAL_FRAGMENT\'...}" />
-            <marker date="1480778342000" expanded="true" signature="8656:8796" ph="{&quot;left&quot;: \'prev,next today\'...}" />
-            <marker date="1480778342000" expanded="true" signature="8953:9466" ph="SELECT DISTI... mata_kuliah_spesial" />
+            <marker date="1480781181000" expanded="true" signature="361:392" ph="SELECT DISTI... mata_kuliah_spesial" />
+            <marker date="1480781181000" expanded="true" signature="361:1010" ph="SELECT DISTI... mata_kuliah_spesial" />
+            <marker date="1480781181000" expanded="true" signature="361:1011" ph="SELECT DISTI... mata_kuliah_spesial" />
+            <marker date="1480781181000" expanded="true" signature="1041:1758" ph="select mks.i... mata_kuliah_spesial" />
+            <marker date="1480781181000" expanded="true" signature="1797:2377" ph="SELECT DISTI... jadwal_sidang" />
+            <marker date="1480781181000" expanded="true" signature="2572:2720" ph="..." />
+            <marker date="1480781181000" expanded="true" signature="2653:2720" ph="..." />
+            <marker date="1480781181000" expanded="true" signature="2790:2905" ph="Select count... dosen_pembimbing" />
+            <marker date="1480781181000" expanded="true" signature="3193:3302" ph="Select count... dosen_penguji" />
+            <marker date="1480781181000" expanded="true" signature="3688:3884" ph="..." />
+            <marker date="1480781181000" expanded="true" signature="3938:4073" ph="select d.nip... dosen_pembimbing" />
+            <marker date="1480781181000" expanded="true" signature="4498:4627" ph="select d.nip... dosen_penguji" />
+            <marker date="1480781181000" expanded="true" signature="8444:8956" ph="SELECT mks.i... mata_kuliah_spesial" />
+            <marker date="1480781181000" expanded="true" signature="9221:9627" ph="..." />
+            <marker date="1480781181000" expanded="true" signature="9255:9621" ph="{...}" />
+            <marker date="1480781181000" expanded="true" signature="9291:9621" ph="{&quot;defaultDate&quot;: \'EXTERNAL_FRAGMENT\'...}" />
+            <marker date="1480781181000" expanded="true" signature="9356:9496" ph="{&quot;left&quot;: \'prev,next today\'...}" />
+            <marker date="1480781181000" expanded="true" signature="9653:10166" ph="SELECT DISTI... mata_kuliah_spesial" />
           </folding>
         </state>
       </provider>
@@ -850,23 +850,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/home-dosen.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="157" column="60" selection-start-line="157" selection-start-column="60" selection-end-line="157" selection-end-column="60" />
+        <state relative-caret-position="0">
+          <caret line="20" column="43" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
           <folding>
-            <marker date="1480778342000" expanded="true" signature="363:1080" ph="select mks.i... mata_kuliah_spesial" />
-            <marker date="1480778342000" expanded="true" signature="1872:2020" ph="..." />
-            <marker date="1480778342000" expanded="true" signature="1953:2020" ph="..." />
-            <marker date="1480778342000" expanded="true" signature="2090:2205" ph="Select count... dosen_pembimbing" />
-            <marker date="1480778342000" expanded="true" signature="2493:2602" ph="Select count... dosen_penguji" />
-            <marker date="1480778342000" expanded="true" signature="2988:3184" ph="..." />
-            <marker date="1480778342000" expanded="true" signature="3238:3373" ph="select d.nip... dosen_pembimbing" />
-            <marker date="1480778342000" expanded="true" signature="3798:3927" ph="select d.nip... dosen_penguji" />
-            <marker date="1480778342000" expanded="true" signature="7744:8256" ph="SELECT mks.i... mata_kuliah_spesial" />
-            <marker date="1480778342000" expanded="true" signature="8521:8927" ph="..." />
-            <marker date="1480778342000" expanded="true" signature="8555:8921" ph="{...}" />
-            <marker date="1480778342000" expanded="true" signature="8591:8921" ph="{&quot;defaultDate&quot;: \'EXTERNAL_FRAGMENT\'...}" />
-            <marker date="1480778342000" expanded="true" signature="8656:8796" ph="{&quot;left&quot;: \'prev,next today\'...}" />
-            <marker date="1480778342000" expanded="true" signature="8953:9466" ph="SELECT DISTI... mata_kuliah_spesial" />
+            <marker date="1480781181000" expanded="true" signature="361:392" ph="SELECT DISTI... mata_kuliah_spesial" />
+            <marker date="1480781181000" expanded="true" signature="361:1010" ph="SELECT DISTI... mata_kuliah_spesial" />
+            <marker date="1480781181000" expanded="true" signature="361:1011" ph="SELECT DISTI... mata_kuliah_spesial" />
+            <marker date="1480781181000" expanded="true" signature="1041:1758" ph="select mks.i... mata_kuliah_spesial" />
+            <marker date="1480781181000" expanded="true" signature="1797:2377" ph="SELECT DISTI... jadwal_sidang" />
+            <marker date="1480781181000" expanded="true" signature="2572:2720" ph="..." />
+            <marker date="1480781181000" expanded="true" signature="2653:2720" ph="..." />
+            <marker date="1480781181000" expanded="true" signature="2790:2905" ph="Select count... dosen_pembimbing" />
+            <marker date="1480781181000" expanded="true" signature="3193:3302" ph="Select count... dosen_penguji" />
+            <marker date="1480781181000" expanded="true" signature="3688:3884" ph="..." />
+            <marker date="1480781181000" expanded="true" signature="3938:4073" ph="select d.nip... dosen_pembimbing" />
+            <marker date="1480781181000" expanded="true" signature="4498:4627" ph="select d.nip... dosen_penguji" />
+            <marker date="1480781181000" expanded="true" signature="8444:8956" ph="SELECT mks.i... mata_kuliah_spesial" />
+            <marker date="1480781181000" expanded="true" signature="9221:9627" ph="..." />
+            <marker date="1480781181000" expanded="true" signature="9255:9621" ph="{...}" />
+            <marker date="1480781181000" expanded="true" signature="9291:9621" ph="{&quot;defaultDate&quot;: \'EXTERNAL_FRAGMENT\'...}" />
+            <marker date="1480781181000" expanded="true" signature="9356:9496" ph="{&quot;left&quot;: \'prev,next today\'...}" />
+            <marker date="1480781181000" expanded="true" signature="9653:10166" ph="SELECT DISTI... mata_kuliah_spesial" />
           </folding>
         </state>
       </provider>
