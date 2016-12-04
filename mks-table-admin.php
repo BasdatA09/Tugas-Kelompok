@@ -89,7 +89,6 @@ function get_table($order)
 		}
 		get_table($sort);
 		?>
-
 		<script>
 			$(document).ready(function() {
 
