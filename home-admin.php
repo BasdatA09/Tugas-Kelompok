@@ -70,6 +70,111 @@ function get_table($order)
 
 }
 
+$connection = new database();
+$conn = $connection->connectDB();
+
+$query_term = 'SELECT * from sisidang.term ';
+$hasil = $conn->prepare($query_term);
+$hasil->execute();
+$terms = $hasil->fetchAll(PDO::FETCH_ASSOC);
+$termsarr = array();
+
+
+$query_jmks = 'SELECT * from sisidang.jenismks ';
+$hasil = $conn->prepare($query_jmks);
+$hasil->execute();
+$jenis_mkss = $hasil->fetchAll(PDO::FETCH_ASSOC);
+//$termsarr[] = array();
+
+foreach($terms as$key=>$data) {
+    if ($data['semester'] == 1) {
+        $termsarr[] = array('1' => '<td> Gasal <br>' . $data['tahun'] . '/' . ($data['tahun'] + 1) . '</td>', '2' => '1,' . $data['tahun']);
+    } elseif ($data['semester'] == 2) {
+        $termsarr[] = array('1' => '<td> Genap <br>' . ($data['tahun'] - 1) . '/' . $data['tahun'] . '</td>', '2' => '2,' . $data['tahun']);
+    } else {
+        $termsarr[] = array('1' => '<td> Pendek <br>' . ($data['tahun']-1) . '/' . $data['tahun'] . '</td>', '2' => '3,' . $data['tahun']);
+    }
+}
+
+
+
+
+function toDropDown($arr, $val, $name, $default, $label, $postname)
+{
+    $select = '<select id="' . $label . '" class="form-control" name="' . $postname . '" required>
+                <option value="">' . $default . '</option>';
+
+    foreach ($arr as $key => $value) {
+        $select .= "<option value='" . $value[$val] . "'>" . $value[$name] . "</option>";
+    }
+    $select .= "</select>";
+    return $select;
+}
+
+
+
+function get_hasil_cari()
+{
+
+    $connection = new database();
+    $conn = $connection->connectDB();
+    $term = explode(',', $_POST['term']);
+    $semester = $term[0];
+    $tahun = $term[1];
+
+    try{
+        $query = "SELECT mks.idmks as id_mks , J.NamaMKS as nama_mks , M.Nama as nama_mhs , MKS.Judul as judul_mks , JS.tanggal as tgl , JS.jam_mulai as jam_mulai , JS.jam_selesai as jam_selesai , r.namaruangan as nama_ruangan from sisidang.mata_kuliah_spesial mks inner join sisidang.mahasiswa m on mks.npm = m.npm inner join sisidang.jadwal_sidang js on js.idmks = mks.idmks inner join sisidang.jenismks j on j.id = mks.idjenismks inner join sisidang.ruangan r on js.idruangan = r.idruangan and mks.issiapsidang = true and mks.tahun =:tahun and mks.semester =:semester and j.id =:namamks";
+        //$query = "SELECT mks.idmks as id_mks, J.NamaMKS as nama_mks , M.Nama as nama_mhs, MKS.Judul as judul_mks, JS.Tanggal as tgl , JS.jam_mulai as jam_mulai , JS.jam_selesai as jam_selesai , r.namaruangan as nama_ruangan  FROM sisidang.Mata_Kuliah_Spesial mks , sisidang.Jenismks J , sisidang.Jadwal_sidang js  , sisidang.mahasiswa m , sisidang.ruangan r where m.npm = mks.npm and mks.idjenismks = j.ID and js.idmks = mks.idmks and js.idruangan = r.idruangan and mks.issiapsidang = true order by $order ";
+        $hasil = $conn->prepare($query);
+        $hasil->execute(array(':semester' => $semester ,':tahun' => $tahun , ':namamks' => $_POST['jmks']));
+
+        while($hasil_row = $hasil->fetch(PDO::FETCH_ASSOC))
+        {
+            echo '<tr>
+                    <td>'.$hasil_row['nama_mks'].'</td>
+                    <td>'.$hasil_row['nama_mhs'].'<br>
+                    Judul: '.$hasil_row['judul_mks'].'
+                    </td>         
+                ';
+            $mks_id = $hasil_row['id_mks'];
+            $query2 = "Select d.nama as nama from sisidang.dosen_pembimbing dp inner join sisidang.dosen d on d.nip = dp.nipdosenpembimbing where dp.idmks = $mks_id";
+            $hasil2 = $conn->prepare($query2);
+            $hasil2->execute();
+
+            echo '<td><ul>';
+            while($hasil2_row = $hasil2->fetch(PDO::FETCH_ASSOC))
+            {
+
+                echo '<li>'.$hasil2_row['nama'].'</li>';
+            }
+            echo '</ul></td>';
+
+            $query3 = "Select d.nama as nama from sisidang.dosen_penguji dp inner join sisidang.dosen d on d.nip = dp.nipdosenpenguji where dp.idmks = $mks_id";
+            $hasil3 = $conn->prepare($query3);
+            $hasil3->execute();
+            echo '<td><ul>';
+            while($hasil3_row = $hasil3->fetch(PDO::FETCH_ASSOC))
+            {
+                echo '<li>'.$hasil3_row['nama'].'</li>';
+            }
+            echo '</ul></td>';
+            echo '
+                    <td>'.$hasil_row['tgl'].'<br>
+                    '.$hasil_row['jam_mulai'].'-'.$hasil_row['jam_selesai'].'<br>
+                    Ruangan: '.$hasil_row['nama_ruangan'].'
+                    </td>         
+                ';
+            echo '<td><a href="ubah-jadwal-sidang.php">Edit</a></td>';
+            echo '</tr>';
+        }
+
+
+
+    } catch(PDOException $e){
+        echo $e->getMessage();
+    }
+
+}
 
 ?>
 <!DOCTYPE html>
@@ -99,40 +204,32 @@ function get_table($order)
                     <button id="admHomeMhsButton">Mahasiswa</button>
                 </div>
                 <div class="small-12 columns" id="admHomeSidangContent">
-                    <form class="row expanded">
+                    <form method="post" action="home-admin.php" class="row expanded">
                         <div class="small-12 columns">
                             <label>Term Sidang</label>
-                            <select>
-                                <option>Term</option>
-                            </select>
+                            <?php echo toDropDown($termsarr,"2","1","Pilih Term","","term"); ?>
                         </div>
                         <div class="small-12 columns">
                             <label>Jenis Sidang</label>
-                            <select>
-                                <option>Jenis</option>
-                            </select>
+                            <?php echo toDropDown($jenis_mkss,"id","namamks","Pilih Jenis Mks","","jmks"); ?>
                         </div>
                         <div class="small-12 columns">
-                            <input type="submit" value="cari" />
+                            <input type="submit"  name="perintah" value="cari" />
                         </div>
                     </form>
                 </div>
                 <div class="small-12 columns" id="admHomeMhsContent" style="display: none;">
-                    <form class="row expanded">
+                    <form method="post" action="home-admin.php" class="row expanded">
                         <div class="small-12 columns">
                             <label>Term Mahasiswa</label>
-                            <select>
-                                <option>Term</option>
-                            </select>
+                            <?php echo toDropDown($termsarr,"2","1","Pilih Term","","term"); ?>
                         </div>
                         <div class="small-12 columns">
                             <label>Jenis Sidang Mahasiswa</label>
-                            <select>
-                                <option>Jenis</option>
-                            </select>
+                            <?php echo toDropDown($jenis_mkss,"id","namamks","Pilih Jenis Mks","","jmks"); ?>
                         </div>
                         <div class="small-12 columns">
-                            <input type="submit" value="cari" />
+                            <input type="submit" name="perintah" value="cari" />
                         </div>
                     </form>
                 </div>
@@ -156,20 +253,13 @@ function get_table($order)
                 </thead>
                 <tbody>
                 <?php
-//                if ($_SERVER['REQUEST_METHOD'] === 'POST')
-//                {
-//                    if (!empty($_POST['command']) && $_POST['command'] === 'jenis_sidang')
-//                    {
-//                        get_table('j.namamks asc');
-//                    } elseif(!empty($_POST['command']) && $_POST['command'] === 'mahasiswa')
-//                    {
-//                        get_table('m.nama asc');
-//                    } elseif(!empty($_POST['command']) && $_POST['command'] === 'waktu')
-//                    {
-//                        get_table('(js.tanggal , js.jam_mulai ,js.jam_selesai) asc');
-//                    }
-//                } else {
-                    get_table('(js.tanggal , js.jam_mulai ,js.jam_selesai) asc');
+                    if(isset($_POST['perintah']) && $_POST['perintah'] == 'cari')
+                    {
+                        get_hasil_cari();
+
+                    } else {
+                        get_table('(js.tanggal , js.jam_mulai ,js.jam_selesai) asc');
+                    }
 //                }
 
                 ?>
