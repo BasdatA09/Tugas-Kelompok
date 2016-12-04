@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8f65ab90-4e6e-4be4-be56-7815ad7f9ba4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/app.css" afterPath="$PROJECT_DIR$/assets/css/app.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home-admin.php" afterPath="$PROJECT_DIR$/home-admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home-dosen.php" afterPath="$PROJECT_DIR$/home-dosen.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lihat-jadwal-sidang-admin.php" afterPath="$PROJECT_DIR$/lihat-jadwal-sidang-admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lihat-jadwal-sidang-dosen.php" afterPath="$PROJECT_DIR$/lihat-jadwal-sidang-dosen.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lihat-jadwal-sidang-mahasiswa.php" afterPath="$PROJECT_DIR$/lihat-jadwal-sidang-mahasiswa.php" />
-    </list>
+    <list default="true" id="8f65ab90-4e6e-4be4-be56-7815ad7f9ba4" name="Default" comment="" />
     <ignored path="tugasakhirbasdat.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -464,7 +457,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25390625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
