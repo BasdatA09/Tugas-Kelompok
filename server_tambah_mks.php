@@ -42,6 +42,7 @@ for ($i = 0; $i < sizeof($_POST['penguji']); $i++) {
 
 }
 
+header("Location: home.php");
 
 //
 //

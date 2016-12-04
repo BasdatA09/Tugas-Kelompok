@@ -150,6 +150,10 @@ function toDropDown($arr, $val, $name, $default, $label, $postname)
 
 					$("#penguji").append(res);
 				}
+
+				$(".cancelButton").click(function () {
+					window.location.href ="home.php";
+				});
 			});
 		</script>
 		<?php include 'footer.php' ?>

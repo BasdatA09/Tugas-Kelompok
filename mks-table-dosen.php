@@ -68,6 +68,7 @@ function get_table($nipdosen,$order)
     <h1 class="subtitle">Daftar Mata Kuliah Spesial (dosen)</h1>
 
     <form action="mata-kuliah-spesial.php" method="post">
+        Sort by:
     <select name='sort' onchange='if(this.value != 0) {this.form.submit();}'>
         <option value="mhs.nama asc"  <?php if(isset($_SESSION["mks_order"]) && $_SESSION["mks_order"] == "mhs.nama asc" )echo "selected='selected'";?>>Mahasiswa</option>
         <option value="jmks.namamks asc" <?php if(isset($_SESSION["mks_order"]) && $_SESSION["mks_order"] == "jmks.namamks asc" )echo "selected='selected'";?>>Jenis MKS</option>
@@ -98,7 +99,10 @@ function get_table($nipdosen,$order)
         <script>
             $(document).ready(function() {
 
-                $('#daftarMKS').DataTable({ordering:false,paging:true,info:false});
+                $('#daftarMKS').DataTable({
+                    ordering:false,
+                    paging:true,
+                    info:false});
             } );
         </script>
 

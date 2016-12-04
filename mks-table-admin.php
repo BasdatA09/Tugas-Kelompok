@@ -63,6 +63,7 @@ function get_table($order)
 	<h1 class="subtitle">Daftar Mata Kuliah Spesial (admin)</h1>
 	<button class="addScheduleButton" id="admAddScheduleButton">Tambah</button>
 	<form action="mata-kuliah-spesial.php" method="post">
+		Sort by:
 		<select name='sort_admin' onchange='if(this.value != 0) {this.form.submit();}'>
 			<option value="mhs.nama asc"  <?php if(isset($_SESSION["mks_order_admin"]) && $_SESSION["mks_order_admin"] == "mhs.nama asc" )echo "selected='selected'";?>>Mahasiswa</option>
 			<option value="jmks.namamks asc" <?php if(isset($_SESSION["mks_order_admin"]) && $_SESSION["mks_order_admin"] == "jmks.namamks asc" )echo "selected='selected'";?>>Jenis MKS</option>
@@ -92,7 +93,10 @@ function get_table($order)
 		<script>
 			$(document).ready(function() {
 
-				$('#daftarMKS').DataTable({ordering:false,paging:true,info:false});
+				$('#daftarMKS').DataTable({
+					ordering:false,
+					paging:true,
+					info:false});
 				$("#admAddScheduleButton").click(function () {
 					window.location.href ="tambah-mks.php";
 				});
