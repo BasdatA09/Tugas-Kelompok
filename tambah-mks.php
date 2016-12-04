@@ -1,6 +1,10 @@
 <?php
 session_start();
 require_once 'database.php';
+if(!isset($_SESSION['role'])){
+	header('location: login.php');
+}
+
 
 $connection = new database();
 $conn = $connection->connectDB();

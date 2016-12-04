@@ -17,13 +17,16 @@ function get_table($nip , $order)
 	$connection = new database();
 	$conn = $connection->connectDB();
 	try {
-        $query = "select mks.ijinmajusidang ,mks.pengumpulanhardcopy ,mhs.nama ,j.namamks , mks.judul , js.tanggal ,js.jam_mulai ,js.jam_selesai ,dp.nipdosenpenguji ,dpem.nipdosenpembimbing ,mks.idmks ,r.namaruangan from sisidang.mata_kuliah_spesial mks inner join sisidang.mahasiswa mhs on mhs.npm = mks.npm inner join sisidang.jadwal_sidang js on js.idmks = mks.idmks inner join sisidang.jenismks j on j.id = mks.idjenismks inner join sisidang.ruangan r on r.idruangan = js.idruangan inner join sisidang.dosen_pembimbing dpem on dpem.idmks = mks.idmks inner join sisidang.dosen_penguji dp on dp.idmks = mks.idmks WHERE mks.issiapsidang = true and dp.nipdosenpenguji =:nip OR dpem.nipdosenpembimbing =:nip order by $order";
-		/*
-        $query  = "SELECT mks.ijinmajusidang ,mks.pengumpulanhardcopy ,mhs.nama ,j.namamks , mks.judul , js.tanggal ,js.jam_mulai ,js.jam_selesai ,dp.nipdosenpenguji ,dpem.nipdosenpembimbing ,mks.idmks ,r.namaruangan
+
+	    $query = "SELECT DISTINCT mks.idmks,mks.ijinmajusidang , mks.pengumpulanhardcopy , mhs.nama, j.namamks , mks.judul , js.tanggal , js.jam_mulai , js.jam_selesai , r.namaruangan from sisidang.mata_kuliah_spesial mks inner join sisidang.mahasiswa mhs on mhs.npm =  mks.npm inner join sisidang.jadwal_sidang js on js.idmks = mks.idmks inner join sisidang.jenismks j on j.id = mks.idjenismks INNER JOIN sisidang.ruangan r  on r.idruangan = js.idruangan left outer join sisidang.dosen_pembimbing dpem on dpem.idmks = mks.idmks left outer join sisidang.dosen_penguji dp on dp.idmks = mks.idmks where dpem.nipdosenpembimbing =:nip or dp.nipdosenpenguji =:nip ORDER by $order;";
+        //$query = "select distinct mks.ijinmajusidang ,mks.pengumpulanhardcopy ,mhs.nama ,j.namamks , mks.judul , js.tanggal ,js.jam_mulai ,js.jam_selesai ,dp.nipdosenpenguji ,dpem.nipdosenpembimbing ,mks.idmks ,r.namaruangan from sisidang.mata_kuliah_spesial mks inner join sisidang.mahasiswa mhs on mhs.npm = mks.npm inner join sisidang.jadwal_sidang js on js.idmks = mks.idmks inner join sisidang.jenismks j on j.id = mks.idjenismks inner join sisidang.ruangan r on r.idruangan = js.idruangan left outer join sisidang.dosen_pembimbing dpem on dpem.idmks = mks.idmks left outer join sisidang.dosen_penguji dp on dp.idmks = mks.idmks WHERE mks.issiapsidang = true and dp.nipdosenpenguji =:nip OR dpem.nipdosenpembimbing =:nip order by $order";
+        /*
+        $query  = "SELECT DISTINCT mks.ijinmajusidang ,mks.pengumpulanhardcopy ,mhs.nama ,j.namamks , mks.judul , js.tanggal ,js.jam_mulai ,js.jam_selesai ,dp.nipdosenpenguji ,dpem.nipdosenpembimbing ,mks.idmks ,r.namaruangan
 FROM sisidang.jadwal_sidang js NATURAL JOIN sisidang.mata_kuliah_spesial mks NATURAL JOIN sisidang.mahasiswa mhs JOIN sisidang.jenismks j ON mks.idjenismks = j.id  NATURAL LEFT OUTER JOIN sisidang.dosen_pembimbing dpem NATURAL LEFT OUTER JOIN sisidang.dosen_penguji dp NATURAL JOIN sisidang.ruangan r
 WHERE dp.nipdosenpenguji=:nip OR dpem.nipdosenpembimbing =:nip
 ORDER BY $order";
-		*/
+        */
+
         $hasil = $conn->prepare($query);
         $hasil->execute(array(':nip' => $nip));
 
@@ -160,10 +163,10 @@ ORDER BY $order";
                         get_table($nip_dosen,'mhs.nama asc');
                     } elseif(!empty($_POST['command']) && $_POST['command'] === 'waktu')
                     {
-                        get_table($nip_dosen,'(js.jam_mulai ,js.jam_selesai) asc');
+                        get_table($nip_dosen,'js.jam_mulai asc,js.jam_selesai asc');
                     }
                 } else {
-                    get_table($nip_dosen,'(js.tanggal , js.jam_mulai ,js.jam_selesai) asc');
+                    get_table($nip_dosen,'js.tanggal asc , js.jam_mulai asc ,js.jam_selesai asc');
                 }
 
                 ?>
