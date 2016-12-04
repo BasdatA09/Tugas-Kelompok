@@ -102,28 +102,33 @@ function toDropDown($arr, $val, $name, $default, $label, $postname)
 
 				<div id="penguji">
 				</div>
-
+				<div class="small-12 columns">
+					<button type="button" class="tambahEntity">Tambah penguji</button>
+				</div>
+				<div class="small-6 columns">
+					<button type="submit" class="saveButton">Simpan</button>
+				</div>
+				<div class="small-6 columns">
+					<button type="button" class="cancelButton">Batal</button>
+				</div>
 			</form>
-			<div class="small-12 columns">
-				<button class="tambahEntity">Tambah penguji</button>
-			</div>
-			<div class="small-6 columns">
-				<button class="saveButton">Simpan</button>
-			</div>
-			<div class="small-6 columns">
-				<button class="cancelButton">Batal</button>
-			</div>
 		</div>
 		<?php include 'js.php' ?>
 		<script>
 			$(document).ready(function () {
 				var counter = 0;
 
+				addPenguji();
+
 				$(".tambahEntity").click(function(){
 
+					addPenguji();
+				});
+
+				function addPenguji() {
 					var dosens = <?php echo json_encode($dosens); ?>
 
-					console.log(dosens);
+						console.log(dosens);
 					counter = counter + 1;
 
 					var res = "<div class='small-12 columns'>";
@@ -140,7 +145,7 @@ function toDropDown($arr, $val, $name, $default, $label, $postname)
 
 
 					$("#penguji").append(res);
-				});
+				}
 			});
 		</script>
 		<?php include 'footer.php' ?>

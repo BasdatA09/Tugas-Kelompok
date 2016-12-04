@@ -58,7 +58,7 @@ function get_table($order)
 <!-- Schedule Table Module -->
 <div class="small-12 columns">
 	<h1 class="subtitle">Daftar Mata Kuliah Spesial (admin)</h1>
-	<button class="addScheduleButton" id="admAddScheduleButton" href="tambah-mks.php">Tambah</button>
+	<button class="addScheduleButton" id="admAddScheduleButton">Tambah</button>
 	<form action="mata-kuliah-spesial.php" method="post">
 		<select name='sort_admin' onchange='if(this.value != 0) {this.form.submit();}'>
 			<option value="mhs.nama asc"  <?php if(isset($_SESSION["mks_order_admin"]) && $_SESSION["mks_order_admin"] == "mhs.nama asc" )echo "selected='selected'";?>>Mahasiswa</option>
@@ -91,6 +91,9 @@ function get_table($order)
 			$(document).ready(function() {
 
 				$('#daftarMKS').DataTable({ordering:false,paging:true,info:false});
+				$("#admAddScheduleButton").click(function () {
+					window.location.href ="tambah-mks.php";
+				});
 			} );
 		</script>
 
