@@ -138,7 +138,7 @@ ORDER BY $order";
 		<div class="small-12 columns">
 			<h1 class="subtitle">Daftar Jadwal Sidang</h1>
 			<button class="addScheduleButton" id="admAddScheduleButton">Tambah</button>
-            <h4>Sort By:</h4><a id="jenis_sidang">{Jenis Sidang}</a>,<a id="mahasiswa">{Mahasiswa}</a>,<a id="waktu">{Waktu}</a>
+<!--            <h4>Sort By:</h4><a id="jenis_sidang">{Jenis Sidang}</a>,<a id="mahasiswa">{Mahasiswa}</a>,<a id="waktu">{Waktu}</a>-->
 			<table  id="jadwal_sidang" class="display">
 				<thead>
 				<tr>
@@ -153,37 +153,37 @@ ORDER BY $order";
 				</thead>
 				<tbody>
 				<?php
-                if ($_SERVER['REQUEST_METHOD'] === 'POST')
-                {
-                    if (!empty($_POST['command']) && $_POST['command'] === 'jenis_sidang')
-                    {
-                        get_table($nip_dosen,'j.namamks asc');
-                    } elseif(!empty($_POST['command']) && $_POST['command'] === 'mahasiswa')
-                    {
-                        get_table($nip_dosen,'mhs.nama asc');
-                    } elseif(!empty($_POST['command']) && $_POST['command'] === 'waktu')
-                    {
-                        get_table($nip_dosen,'js.jam_mulai asc,js.jam_selesai asc');
-                    }
-                } else {
+//                if ($_SERVER['REQUEST_METHOD'] === 'POST')
+//                {
+//                    if (!empty($_POST['command']) && $_POST['command'] === 'jenis_sidang')
+//                    {
+//                        get_table($nip_dosen,'j.namamks asc');
+//                    } elseif(!empty($_POST['command']) && $_POST['command'] === 'mahasiswa')
+//                    {
+//                        get_table($nip_dosen,'mhs.nama asc');
+//                    } elseif(!empty($_POST['command']) && $_POST['command'] === 'waktu')
+//                    {
+//                        get_table($nip_dosen,'js.jam_mulai asc,js.jam_selesai asc');
+//                    }
+//                } else {
                     get_table($nip_dosen,'js.tanggal asc , js.jam_mulai asc ,js.jam_selesai asc');
-                }
+//                }
 
                 ?>
 				</tbody>
 			</table>
 		</div>
-        <form method="post" action="home-dosen.php">
-            <input type="hidden" name="command" value="jenis_sidang">
-            <button type="submit" class="hidden" id="sort_js">Kece</button>
-        </form>
-        <form method="post" action="home-dosen.php">
-            <input type="hidden" name="command" value="mahasiswa">
-            <button type="submit" class="hidden" id="sort_mhs">Kece</button>
-        </form>
-        <form method="post" action="home-dosen.php">
-            <input type="hidden" name="command" value="waktu">
-            <button type="submit" class="hidden" id="sort_waktu">Kece</button>
+<!--        <form method="post" action="home-dosen.php">-->
+<!--            <input type="hidden" name="command" value="jenis_sidang">-->
+<!--            <button type="submit" class="hidden" id="sort_js">Kece</button>-->
+<!--        </form>-->
+<!--        <form method="post" action="home-dosen.php">-->
+<!--            <input type="hidden" name="command" value="mahasiswa">-->
+<!--            <button type="submit" class="hidden" id="sort_mhs">Kece</button>-->
+<!--        </form>-->
+<!--        <form method="post" action="home-dosen.php">-->
+<!--            <input type="hidden" name="command" value="waktu">-->
+<!--            <button type="submit" class="hidden" id="sort_waktu">Kece</button>-->
         </form>
 		<!-- Datepicker -->
 	</div>

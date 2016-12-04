@@ -94,6 +94,18 @@ function get_content($npm)
 
 }
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SiSidang</title>
+    <link rel="stylesheet" href="assets/css/vendor.css" />
+    <link rel="stylesheet" href="assets/css/app.css" />
+    <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="assets/css/fullcalendar.min.css"/>
+    <link rel="stylesheet" href="assets/css/fullcalendar.print.css" rel='stylesheet' media='print' />
+</head>
+<body>
+<?php include_once 'header.php';?>
 <div class="small-12 columns adminHome">
     <h1 class="subtitle">Mahasiswa</h1>
     <div class="row expanded">

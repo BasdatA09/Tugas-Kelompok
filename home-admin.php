@@ -142,7 +142,7 @@ function get_table($order)
         <div class="small-12 columns">
             <h1 class="subtitle">Daftar Jadwal Sidang</h1>
             <button class="addScheduleButton" id="admAddScheduleButton">Tambah</button>
-            <h4>Sort By:</h4><a id="jenis_sidang">{Jenis Sidang}</a>,<a id="mahasiswa">{Mahasiswa}</a>,<a id="waktu">{Waktu}</a>
+<!--            <h4>Sort By:</h4><a id="jenis_sidang">{Jenis Sidang}</a>,<a id="mahasiswa">{Mahasiswa}</a>,<a id="waktu">{Waktu}</a>-->
             <table  id="jadwal_sidang" class="display">
                 <thead>
                 <tr>
@@ -156,38 +156,38 @@ function get_table($order)
                 </thead>
                 <tbody>
                 <?php
-                if ($_SERVER['REQUEST_METHOD'] === 'POST')
-                {
-                    if (!empty($_POST['command']) && $_POST['command'] === 'jenis_sidang')
-                    {
-                        get_table('j.namamks asc');
-                    } elseif(!empty($_POST['command']) && $_POST['command'] === 'mahasiswa')
-                    {
-                        get_table('m.nama asc');
-                    } elseif(!empty($_POST['command']) && $_POST['command'] === 'waktu')
-                    {
-                        get_table('(js.tanggal , js.jam_mulai ,js.jam_selesai) asc');
-                    }
-                } else {
+//                if ($_SERVER['REQUEST_METHOD'] === 'POST')
+//                {
+//                    if (!empty($_POST['command']) && $_POST['command'] === 'jenis_sidang')
+//                    {
+//                        get_table('j.namamks asc');
+//                    } elseif(!empty($_POST['command']) && $_POST['command'] === 'mahasiswa')
+//                    {
+//                        get_table('m.nama asc');
+//                    } elseif(!empty($_POST['command']) && $_POST['command'] === 'waktu')
+//                    {
+//                        get_table('(js.tanggal , js.jam_mulai ,js.jam_selesai) asc');
+//                    }
+//                } else {
                     get_table('(js.tanggal , js.jam_mulai ,js.jam_selesai) asc');
-                }
+//                }
 
                 ?>
                 </tbody>
             </table>
         </div>
-        <form method="post" action="home-admin.php">
-            <input type="hidden" name="command" value="jenis_sidang">
-            <button type="submit" class="hidden" id="sort_js">Kece</button>
-        </form>
-        <form method="post" action="home-admin.php">
-            <input type="hidden" name="command" value="mahasiswa">
-            <button type="submit" class="hidden" id="sort_mhs">Kece</button>
-        </form>
-        <form method="post" action="home-admin.php">
-            <input type="hidden" name="command" value="waktu">
-            <button type="submit" class="hidden" id="sort_waktu">Kece</button>
-        </form>
+<!--        <form method="post" action="home-admin.php">-->
+<!--            <input type="hidden" name="command" value="jenis_sidang">-->
+<!--            <button type="submit" class="hidden" id="sort_js">Kece</button>-->
+<!--        </form>-->
+<!--        <form method="post" action="home-admin.php">-->
+<!--            <input type="hidden" name="command" value="mahasiswa">-->
+<!--            <button type="submit" class="hidden" id="sort_mhs">Kece</button>-->
+<!--        </form>-->
+<!--        <form method="post" action="home-admin.php">-->
+<!--            <input type="hidden" name="command" value="waktu">-->
+<!--            <button type="submit" class="hidden" id="sort_waktu">Kece</button>-->
+<!--        </form>-->
         <!-- Datepicker -->
         <div class="small-12 columns">
             <div class="row expanded">

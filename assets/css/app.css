@@ -208,6 +208,10 @@ table td button {
     color: #FFF;
 }
 
+.sort-form {
+    margin-bottom: 2em;
+}
+
 .adminHome input[type="submit"] {
     background: #283739;
     margin-top: 1rem;
