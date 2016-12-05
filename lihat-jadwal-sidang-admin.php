@@ -33,7 +33,7 @@ function get_table($order)
                     <td>'.$hasil_row['nama_mks'].'</td>
                     <td>'.$hasil_row['nama_mhs'].'<br>
                     Judul: '.$hasil_row['judul_mks'].'
-                    </td>         
+                    </td>
                 ';
             $mks_id = $hasil_row['id_mks'];
             $query2 = "Select d.nama as nama from sisidang.dosen_pembimbing dp inner join sisidang.dosen d on d.nip = dp.nipdosenpembimbing where dp.idmks = $mks_id";
@@ -61,7 +61,7 @@ function get_table($order)
                     <td>'.$hasil_row['tgl'].'<br>
                     '.$hasil_row['jam_mulai'].'-'.$hasil_row['jam_selesai'].'<br>
                     Ruangan: '.$hasil_row['nama_ruangan'].'
-                    </td>         
+                    </td>
                 ';
             echo '<td><a href="ubah-jadwal-sidang.php">Edit</a></td>';
             echo '</tr>';
@@ -81,6 +81,7 @@ function get_table($order)
 <html>
 <head>
     <title>SiSidang</title>
+      <?php include_once 'favicon.php'; ?>
     <link rel="stylesheet" href="assets/css/vendor.css" />
     <link rel="stylesheet" href="assets/css/app.css" />
     <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css"/>

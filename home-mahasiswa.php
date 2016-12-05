@@ -69,7 +69,7 @@ function get_content($npm)
 			{
 				echo "Kumpul Hard Copy";
 			}
-			echo '</td>		
+			echo '</td>
 					</tr>
 						<tr>
 							<th>Dosen Penguji</th>
@@ -98,6 +98,7 @@ function get_content($npm)
 <html>
 <head>
 	<title>SiSidang</title>
+	  <?php include_once 'favicon.php'; ?>
 	<link rel="stylesheet" href="assets/css/vendor.css" />
 	<link rel="stylesheet" href="assets/css/app.css" />
 	<link rel="stylesheet" href="assets/css/jquery.dataTables.min.css"/>

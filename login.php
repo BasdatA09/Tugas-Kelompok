@@ -13,6 +13,7 @@ require_once 'database.php';
 <html>
 <head>
     <title>SiSidang</title>
+      <?php include_once 'favicon.php'; ?>
     <link rel="stylesheet" href="assets/css/vendor.css" />
     <link rel="stylesheet" href="assets/css/app.css" />
 </head>

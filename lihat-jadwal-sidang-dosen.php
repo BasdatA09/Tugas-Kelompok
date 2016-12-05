@@ -38,7 +38,7 @@ ORDER BY $order";
 
             echo '<tr>
                     <td>' . $hasil_row['nama'] . '</td>
-                    <td>' . $hasil_row['namamks'] . '<br>        
+                    <td>' . $hasil_row['namamks'] . '<br>
                 Sebagai: ';
             $mks_id = $hasil_row['idmks'];
             $query2 = "Select count(*) as hasil from sisidang.dosen_pembimbing dp where dp.idmks = $mks_id and dp.nipdosenpembimbing =:nip";
@@ -57,13 +57,13 @@ ORDER BY $order";
                 echo 'Dosen Penguji';
             }
 
-            echo '</td> 
+            echo '</td>
             <td>'.$hasil_row['judul'].'</td>';
             echo '
                     <td>'.$hasil_row['tanggal'].'<br>
                     '.$hasil_row['jam_mulai'].'-'.$hasil_row['jam_selesai'].'<br>
                     Ruangan: '.$hasil_row['namaruangan'].'
-                    </td>         
+                    </td>
                 ';
 
             $query4 = "select d.nip ,  d.nama as nama from sisidang.dosen_pembimbing dp , sisidang.dosen d where dp.nipdosenpembimbing = d.nip and dp.idmks = $mks_id";
@@ -127,6 +127,7 @@ ORDER BY $order";
 <html>
 <head>
     <title>SiSidang</title>
+      <?php include_once 'favicon.php'; ?>
     <link rel="stylesheet" href="assets/css/vendor.css" />
     <link rel="stylesheet" href="assets/css/app.css" />
     <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css"/>
