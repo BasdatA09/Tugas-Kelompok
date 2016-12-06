@@ -29,7 +29,6 @@ $hasil = $conn->prepare($query);
 $hasil->execute();
 $terms = $hasil->fetchAll(PDO::FETCH_ASSOC);
 $termsarr = array();
-//$termsarr[] = array();
 
 foreach($terms as$key=>$data) {
 	if ($data['semester'] == 1) {
@@ -52,6 +51,19 @@ function toDropDown($arr, $val, $name, $default, $label, $postname)
 	$select .= "</select>";
 	return $select;
 }
+
+function toDropDownNoRequired($arr, $val, $name, $default, $label, $postname)
+{
+	$select = '<select id="' . $label . '" class="form-control" name="' . $postname . '">
+                <option value="">Pilih ' . $default . '</option>';
+
+	foreach ($arr as $key => $value) {
+		$select .= "<option value='" . $value[$val] . "'>" . $value[$name] . "</option>";
+	}
+	$select .= "</select>";
+	return $select;
+}
+
 ?>
 
 
@@ -72,36 +84,36 @@ function toDropDown($arr, $val, $name, $default, $label, $postname)
 			<form action="server_tambah_mks.php" method="post">
 				<div class="small-12 columns">
 					<label>Term</label>
-					<?php echo toDropDown($termsarr,"2","1","Pilih Term","","term") ?>
+					<?php echo toDropDown($termsarr,"2","1","Term","","term") ?>
 				</div>
 				<div class="small-12 columns">
 					<label>Jenis MKS</label>
-					<?php echo toDropDown($jenis_mkss,"id","namamks","Pilih Jenis Mks","","jmks") ?>
+					<?php echo toDropDown($jenis_mkss,"id","namamks","Jenis Mks","","jmks") ?>
 
 				</div>
 				<div class="small-12 columns">
 					<label>Mahasiswa</label>
-					<?php echo toDropDown($mahasiswas,"npm","nama","Pilih Mahasiswa","","mahasiswa") ?>
+					<?php echo toDropDown($mahasiswas,"npm","nama","Mahasiswa","","mahasiswa") ?>
 
 				</div>
 				<div class="small-12 columns">
 					<label>Judul MKS</label>
-					<input type="text" placeholder="Judul MKS" name="judul_mks"/>
+					<input type="text" placeholder="Judul MKS" name="judul_mks" required/>
 				</div>
 
 				<div class="small-12 columns">
 					<label>Pembimbing 1</label>
-					<?php echo toDropDown($dosens,"nip","nama","Pilih pembimbing","","pembimbing[]") ?>
+					<?php echo toDropDown($dosens,"nip","nama","Pembimbing","","pembimbing[]") ?>
 				</div>
 
 				<div class="small-12 columns">
 					<label>Pembimbing 2</label>
-					<?php echo toDropDown($dosens,"nip","nama","Pilih pembimbing","","pembimbing[]") ?>
+					<?php echo toDropDownNoRequired($dosens,"nip","nama","Pembimbing","","pembimbing[]") ?>
 				</div>
 
 				<div class="small-12 columns">
 					<label>Pembimbing 3</label>
-					<?php echo toDropDown($dosens,"nip","nama","Pilih pembimbing","","pembimbing[]") ?>
+					<?php echo toDropDownNoRequired($dosens,"nip","nama","Pembimbing","","pembimbing[]") ?>
 				</div>
 
 				<div id="penguji">

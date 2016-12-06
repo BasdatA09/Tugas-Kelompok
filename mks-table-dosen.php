@@ -102,7 +102,8 @@ function get_table($nipdosen,$order)
                 $('#daftarMKS').DataTable({
                     ordering:false,
                     paging:true,
-                    info:false});
+                    info:false,
+                    bFilter:false});
             } );
         </script>
 

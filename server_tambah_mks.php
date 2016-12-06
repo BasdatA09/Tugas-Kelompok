@@ -27,7 +27,7 @@ $hasil->execute(array(':idmks'=>($lastidmks+1), ':npm'=>$_POST['mahasiswa'], ':t
 
 
 
-for ($i = 0; $i < 3; $i++) {
+for ($i = 0; $i < sizeof($_POST['pembimbing']) && $_POST['pembimbing'][$i] != null; $i++) {
     $query1 = 'INSERT INTO sisidang.dosen_pembimbing (idmks, nipdosenpembimbing) VALUES (:idmks, :nipdosenpembimbing)';
     $hasil = $conn->prepare($query1);
     $hasil->execute(array(':idmks'=>($lastidmks+1), ':nipdosenpembimbing'=>$_POST['pembimbing'][$i]));
@@ -44,13 +44,6 @@ for ($i = 0; $i < sizeof($_POST['penguji']); $i++) {
 
 header("Location: home.php");
 
-//
-//
-//$_POST["judul_mks"];
-//$_POST["pembimbing"];
-//$_POST["penguji"];
-//$_POST["mahasiswa"];
-//$_POST["term"];
-//$_POST["jmks"];
+
 
 ?>
