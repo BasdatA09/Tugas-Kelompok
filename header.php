@@ -17,7 +17,7 @@ $role = $_SESSION['role'];
 
                         if($role[0] === 'admin' || $role[0] === 'dosen')
                         {
-                            echo '<a class="navlink" href="tambah-jadwal-non-sidang.php">Buat Jadwal Non-sidang Dosen</a>';
+                            echo '<a class="navlink" href="buat-jadwal-non-sidang.php">Buat Jadwal Non-sidang Dosen</a>';
                             echo '<a class="navlink" href="mata-kuliah-spesial.php">Lihat Daftar MKS</a>';
                             echo '<a class="navlink" href="izinkan-sidang.php">Izinkan Sidang</a>';
                         }
