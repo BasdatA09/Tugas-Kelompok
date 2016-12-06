@@ -9,6 +9,11 @@ if($_SESSION['role'][0] != 'admin'){
     die();
 }
 
+if(isset($_POST["sort"])){
+    $_SESSION["mks_order"] = $_POST["sort"];
+    header("Location : lihat-jadwal-sidang.php");
+}
+
 require_once 'database.php';
 
 function get_table($order)
@@ -142,7 +147,15 @@ function get_table($order)
             <div class="small-12 columns">
                 <h1 class="subtitle">Daftar Jadwal Sidang</h1>
                 <button class="addScheduleButton" id="admAddScheduleButton">Tambah</button>
-                <h4>Sort By:</h4><a id="jenis_sidang">{Jenis Sidang}</a>,<a id="mahasiswa">{Mahasiswa}</a>,<a id="waktu">{Waktu}</a>
+                <form class="sort-form" action="lihat-jadwal-sidang-admin.php" method="post">
+                    Sort by:
+                    <select name='sort' onchange='if(this.value != 0) {this.form.submit();}'>
+                        <option value="js.tanggal , js.jam_mulai ,js.jam_selesai asc" <?php if(isset($_SESSION["mks_order"]) && $_SESSION["mks_order"] == "js.tanggal , js.jam_mulai ,js.jam_selesai asc" )echo "selected='selected'";?>>Default</option>
+                        <option value="j.namamks asc" <?php if(isset($_SESSION["mks_order"]) && $_SESSION["mks_order"] == "j.namamks asc" )echo "selected='selected'";?>>Jenis MKS</option>
+                        <option value="js.jam_mulai ,js.jam_selesai asc" <?php if(isset($_SESSION["mks_order"]) && $_SESSION["mks_order"] == "js.jam_mulai ,js.jam_selesai asc" )echo "selected='selected'";?>>Waktu</option>
+                        <option value="m.nama asc"  <?php if(isset($_SESSION["mks_order"]) && $_SESSION["mks_order"] == "m.nama asc" )echo "selected='selected'";?>>Mahasiswa</option>
+                    </select>
+                </form>
                 <table  id="jadwal_sidang" class="display">
                     <thead>
                     <tr>
@@ -156,6 +169,7 @@ function get_table($order)
                     </thead>
                     <tbody>
                     <?php
+                    /*
                     if ($_SERVER['REQUEST_METHOD'] === 'POST')
                     {
                         if (!empty($_POST['command']) && $_POST['command'] === 'jenis_sidang')
@@ -166,28 +180,35 @@ function get_table($order)
                             get_table('m.nama asc');
                         } elseif(!empty($_POST['command']) && $_POST['command'] === 'waktu')
                         {
-                            get_table('(js.tanggal , js.jam_mulai ,js.jam_selesai) asc');
+                            get_table('(js.jam_mulai ,js.jam_selesai) asc');
                         }
                     } else {
                         get_table('(js.tanggal , js.jam_mulai ,js.jam_selesai) asc');
                     }
+                    */
+                        $sort = "js.tanggal , js.jam_mulai ,js.jam_selesai asc";
+                        if(isset($_SESSION["mks_order"])){
+                            $sort=$_SESSION["mks_order"];
+                        }
+                            get_table($sort);
+
 
                     ?>
                     </tbody>
                 </table>
             </div>
-            <form method="post" action="lihat-jadwal-sidang-admin.php">
-                <input type="hidden" name="command" value="jenis_sidang">
-                <button type="submit" class="hidden" id="sort_js">Kece</button>
-            </form>
-            <form method="post" action="lihat-jadwal-sidang-admin.php">
-                <input type="hidden" name="command" value="mahasiswa">
-                <button type="submit" class="hidden" id="sort_mhs">Kece</button>
-            </form>
-            <form method="post" action="lihat-jadwal-sidang-admin.php">
-                <input type="hidden" name="command" value="waktu">
-                <button type="submit" class="hidden" id="sort_waktu">Kece</button>
-            </form>
+<!--            <form method="post" action="lihat-jadwal-sidang-admin.php">-->
+<!--                <input type="hidden" name="command" value="jenis_sidang">-->
+<!--                <button type="submit" class="hidden" id="sort_js">Kece</button>-->
+<!--            </form>-->
+<!--            <form method="post" action="lihat-jadwal-sidang-admin.php">-->
+<!--                <input type="hidden" name="command" value="mahasiswa">-->
+<!--                <button type="submit" class="hidden" id="sort_mhs">Kece</button>-->
+<!--            </form>-->
+<!--            <form method="post" action="lihat-jadwal-sidang-admin.php">-->
+<!--                <input type="hidden" name="command" value="waktu">-->
+<!--                <button type="submit" class="hidden" id="sort_waktu">Kece</button>-->
+<!--            </form>-->
             <!-- Datepicker -->
             <div class="small-12 columns">
                 <div class="row expanded">
