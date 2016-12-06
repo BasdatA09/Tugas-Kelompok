@@ -40,9 +40,9 @@ foreach($terms as$key=>$data) {
 	}
 }
 
-function toDropDown($arr, $val, $name, $default, $label, $postname)
+function toDropDown($arr, $val, $name, $default, $postname)
 {
-	$select = '<select id="' . $label . '" class="form-control" name="' . $postname . '" required>
+	$select = '<select class="form-control" name="' . $postname . '" required>
                 <option value="">Pilih ' . $default . '</option>';
 
 	foreach ($arr as $key => $value) {
@@ -52,9 +52,9 @@ function toDropDown($arr, $val, $name, $default, $label, $postname)
 	return $select;
 }
 
-function toDropDownNoRequired($arr, $val, $name, $default, $label, $postname)
+function toDropDownNoRequired($arr, $val, $name, $default, $postname)
 {
-	$select = '<select id="' . $label . '" class="form-control" name="' . $postname . '">
+	$select = '<select class="form-control" name="' . $postname . '">
                 <option value="">Pilih ' . $default . '</option>';
 
 	foreach ($arr as $key => $value) {
@@ -85,16 +85,16 @@ function toDropDownNoRequired($arr, $val, $name, $default, $label, $postname)
 			<form action="server_tambah_mks.php" method="post">
 				<div class="small-12 columns">
 					<label>Term</label>
-					<?php echo toDropDown($termsarr,"2","1","Term","","term") ?>
+					<?php echo toDropDown($termsarr,"2","1","Term","term") ?>
 				</div>
 				<div class="small-12 columns">
 					<label>Jenis MKS</label>
-					<?php echo toDropDown($jenis_mkss,"id","namamks","Jenis Mks","","jmks") ?>
+					<?php echo toDropDown($jenis_mkss,"id","namamks","Jenis Mks","jmks") ?>
 
 				</div>
 				<div class="small-12 columns">
 					<label>Mahasiswa</label>
-					<?php echo toDropDown($mahasiswas,"npm","nama","Mahasiswa","","mahasiswa") ?>
+					<?php echo toDropDown($mahasiswas,"npm","nama","Mahasiswa","mahasiswa") ?>
 
 				</div>
 				<div class="small-12 columns">
@@ -104,17 +104,17 @@ function toDropDownNoRequired($arr, $val, $name, $default, $label, $postname)
 
 				<div class="small-12 columns">
 					<label>Pembimbing 1</label>
-					<?php echo toDropDown($dosens,"nip","nama","Pembimbing","","pembimbing[]") ?>
+					<?php echo toDropDown($dosens,"nip","nama","Pembimbing","pembimbing[]") ?>
 				</div>
 
 				<div class="small-12 columns">
 					<label>Pembimbing 2</label>
-					<?php echo toDropDownNoRequired($dosens,"nip","nama","Pembimbing","","pembimbing[]") ?>
+					<?php echo toDropDownNoRequired($dosens,"nip","nama","Pembimbing","pembimbing[]") ?>
 				</div>
 
 				<div class="small-12 columns">
 					<label>Pembimbing 3</label>
-					<?php echo toDropDownNoRequired($dosens,"nip","nama","Pembimbing","","pembimbing[]") ?>
+					<?php echo toDropDownNoRequired($dosens,"nip","nama","Pembimbing","pembimbing[]") ?>
 				</div>
 
 				<div id="penguji">
