@@ -25,11 +25,17 @@ class database
 //        $this->dbport = "1999";
 //        $this->uname = "affan";
 //        $this->pass = "affan1234";
-        $this->dbname = "kelompoka09";
-        $this->dbhost = "basdat.southeastasia.cloudapp.azure.com";
-        $this->dbport = "1999";
-        $this->uname = "basdata09";
-        $this->pass = "basdat";
+        // $this->dbname = "kelompoka09";
+        // $this->dbhost = "basdat.southeastasia.cloudapp.azure.com";
+        // $this->dbport = "1999";
+        // $this->uname = "basdata09";
+        // $this->pass = "basdat";
+        $this->dbname = "a09";
+        $this->dbhost = "dbpg.cs.ui.ac.id";
+        $this->dbport = "5432";
+        $this->uname = "a09";
+        $this->pass = "j9LhsK";
+
     }
 
     public function connectDB(){
