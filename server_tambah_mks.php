@@ -20,6 +20,7 @@ $hasil->execute();
 $lastidmks = $hasil->fetchAll(PDO::FETCH_ASSOC);
 $lastidmks = $lastidmks['0']['idmks'];
 
+
 $query = 'INSERT INTO sisidang.mata_kuliah_spesial (idmks, npm, tahun, semester, judul, issiapsidang, pengumpulanhardcopy, ijinmajusidang, idjenismks) 
           VALUES (:idmks, :npm, :tahun, :semester, :judul_mks, FALSE, FALSE, FALSE, :jmks)';
 $hasil = $conn->prepare($query);
