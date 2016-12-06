@@ -27,7 +27,7 @@ $crawl->execute();
 $jadwal = $crawl->fetchAll(PDO::FETCH_ASSOC);
 
 $npmMhs = $jadwal[0]['npm'];
-$mahasiswa = $jadwal[0]['nama'];   
+$mahasiswa = $jadwal[0]['nama'];
 $judul_mks = $jadwal[0]['judul'];
 $tanggal  = $jadwal[0]['tanggal'];
 $jam_mulai = $jadwal[0]['jam_mulai'];
@@ -54,7 +54,7 @@ $crawl->execute();
 $ruangan = $crawl->fetchAll(PDO::FETCH_ASSOC);
 
 $crawl = $conn->prepare($query_dosen);
-$crawl->execute(); 
+$crawl->execute();
 $dosen = $crawl->fetchAll(PDO::FETCH_ASSOC);
 
 $counter = count($penguji);
@@ -94,7 +94,7 @@ return $select;
     <?php include_once 'header.php';?>
     <div class="row addModule">
         <div class="small-12 columns">
-            <h1 class="subtitle">Tambah Jadwal Sidang</h1>
+            <h1 class="subtitle">Ubah Jadwal Sidang</h1>
         </div>
         <form action="server-ubah-jadwal-sidang.php" method="post">
             <div class="small-12 columns">
@@ -144,7 +144,7 @@ return $select;
     </div>
     <?php include 'js.php' ?>
 
-    
+
     <script>
         $(document).ready(function () {
             var counter = <?php echo $counter; ?>;

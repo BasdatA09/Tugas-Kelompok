@@ -12,7 +12,7 @@ $role = $_SESSION['role'];
 					<a class="navlink" href="tambah-mks.php">Tambah Peserta Mata Kuliah Spesial (MKS)</a>
                     <?php
                         if($role[0] === 'admin'){
-                            echo '<a class="navlink" href="tambah-jadwal-sidang.php">Buat Jadwal Sidang MKS</a>';
+                            echo '<a class="navlink" href="buat-jadwal-sidang.php">Buat Jadwal Sidang MKS</a>';
                         }
 
                         if($role[0] === 'admin' || $role[0] === 'dosen')
