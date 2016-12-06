@@ -13,7 +13,7 @@ require_once 'database.php';
 
 function get_table($order)
 {
-
+    $display = '';
     $connection = new database();
     $conn = $connection->connectDB();
     try{
@@ -24,7 +24,7 @@ function get_table($order)
 
         while($hasil_row = $hasil->fetch(PDO::FETCH_ASSOC))
         {
-            echo '<tr>
+            $display .= '<tr>
                     <td>'.$hasil_row['nama_mks'].'</td>
                     <td>'.$hasil_row['nama_mhs'].'<br>
                     Judul: '.$hasil_row['judul_mks'].'
@@ -35,33 +35,34 @@ function get_table($order)
             $hasil2 = $conn->prepare($query2);
             $hasil2->execute();
 
-            echo '<td><ul>';
+            $display .=  '<td><ul>';
                 while($hasil2_row = $hasil2->fetch(PDO::FETCH_ASSOC))
                 {
 
-                    echo '<li>'.$hasil2_row['nama'].'</li>';
+                    $display .=  '<li>'.$hasil2_row['nama'].'</li>';
                 }
-            echo '</ul></td>';
+            $display .=  '</ul></td>';
 
             $query3 = "Select d.nama as nama from sisidang.dosen_penguji dp inner join sisidang.dosen d on d.nip = dp.nipdosenpenguji where dp.idmks = $mks_id";
             $hasil3 = $conn->prepare($query3);
             $hasil3->execute();
-            echo '<td><ul>';
+            $display .=  '<td><ul>';
                 while($hasil3_row = $hasil3->fetch(PDO::FETCH_ASSOC))
                 {
-                    echo '<li>'.$hasil3_row['nama'].'</li>';
+                    $display .=  '<li>'.$hasil3_row['nama'].'</li>';
                 }
-            echo '</ul></td>';
-            echo '
+            $display .=  '</ul></td>';
+            $display .=  '
                     <td>'.$hasil_row['tgl'].'<br>
                     '.$hasil_row['jam_mulai'].'-'.$hasil_row['jam_selesai'].'<br>
                     Ruangan: '.$hasil_row['nama_ruangan'].'
                     </td>
                 ';
-            echo '<td><a href="ubah-jadwal-sidang.php">Edit</a></td>';
-            echo '</tr>';
+            $display .=  '<td><a href="ubah-jadwal-sidang.php">Edit</a></td>';
+            $display .=  '</tr>';
         }
 
+        return $display;
 
 
     } catch(PDOException $e){
@@ -99,10 +100,10 @@ foreach($terms as$key=>$data) {
 
 
 
-function toDropDown($arr, $val, $name, $default, $label, $postname)
+function displaySearchOpt($label, $val, $name, $postname,$arr)
 {
-    $select = '<select id="' . $label . '" class="form-control" name="' . $postname . '" required>
-                <option value="">' . $default . '</option>';
+    $select = '<select class="form-control" name="' . $postname . '" required>
+                <option value="">' . $label . '</option>';
 
     foreach ($arr as $key => $value) {
         $select .= "<option value='" . $value[$val] . "'>" . $value[$name] . "</option>";
@@ -116,6 +117,7 @@ function toDropDown($arr, $val, $name, $default, $label, $postname)
 function get_hasil_cari()
 {
 
+    $display = '';
     $connection = new database();
     $conn = $connection->connectDB();
     $term = explode(',', $_POST['term']);
@@ -130,7 +132,7 @@ function get_hasil_cari()
 
         while($hasil_row = $hasil->fetch(PDO::FETCH_ASSOC))
         {
-            echo '<tr>
+            $display .= '<tr>
                     <td>'.$hasil_row['nama_mks'].'</td>
                     <td>'.$hasil_row['nama_mhs'].'<br>
                     Judul: '.$hasil_row['judul_mks'].'
@@ -141,34 +143,34 @@ function get_hasil_cari()
             $hasil2 = $conn->prepare($query2);
             $hasil2->execute();
 
-            echo '<td><ul>';
+            $display .= '<td><ul>';
             while($hasil2_row = $hasil2->fetch(PDO::FETCH_ASSOC))
             {
 
-                echo '<li>'.$hasil2_row['nama'].'</li>';
+                $display .= '<li>'.$hasil2_row['nama'].'</li>';
             }
-            echo '</ul></td>';
+            $display .= '</ul></td>';
 
             $query3 = "Select d.nama as nama from sisidang.dosen_penguji dp inner join sisidang.dosen d on d.nip = dp.nipdosenpenguji where dp.idmks = $mks_id";
             $hasil3 = $conn->prepare($query3);
             $hasil3->execute();
-            echo '<td><ul>';
+            $display .= '<td><ul>';
             while($hasil3_row = $hasil3->fetch(PDO::FETCH_ASSOC))
             {
-                echo '<li>'.$hasil3_row['nama'].'</li>';
+                $display .= '<li>'.$hasil3_row['nama'].'</li>';
             }
-            echo '</ul></td>';
-            echo '
+            $display .= '</ul></td>';
+            $display .= '
                     <td>'.$hasil_row['tgl'].'<br>
                     '.$hasil_row['jam_mulai'].'-'.$hasil_row['jam_selesai'].'<br>
                     Ruangan: '.$hasil_row['nama_ruangan'].'
                     </td>
                 ';
-            echo '<td><a href="ubah-jadwal-sidang.php">Edit</a></td>';
-            echo '</tr>';
+            $display .= '<td><a href="ubah-jadwal-sidang.php">Edit</a></td>';
+            $display .= '</tr>';
         }
 
-
+        return $display;
 
     } catch(PDOException $e){
         echo $e->getMessage();
@@ -209,11 +211,11 @@ function get_hasil_cari()
                     <form method="post" action="home-admin.php" class="row expanded">
                         <div class="small-12 columns">
                             <label>Term Sidang</label>
-                            <?php echo toDropDown($termsarr,"2","1","Pilih Term","","term"); ?>
+                            <?php echo displaySearchOpt("Pilih Term","2","1","term",$termsarr); ?>
                         </div>
                         <div class="small-12 columns">
                             <label>Jenis Sidang</label>
-                            <?php echo toDropDown($jenis_mkss,"id","namamks","Pilih Jenis Mks","","jmks"); ?>
+                            <?php echo displaySearchOpt("Pilih Jenis Mks","id","namamks","jmks",$jenis_mkss); ?>
                         </div>
                         <div class="small-12 columns">
                             <input type="submit"  name="perintah" value="cari" />
@@ -224,11 +226,11 @@ function get_hasil_cari()
                     <form method="post" action="home-admin.php" class="row expanded">
                         <div class="small-12 columns">
                             <label>Term Mahasiswa</label>
-                            <?php echo toDropDown($termsarr,"2","1","Pilih Term","","term"); ?>
+                            <?php echo displaySearchOpt("Pilih Term","2","1","term",$termsarr); ?>
                         </div>
                         <div class="small-12 columns">
                             <label>Jenis Sidang Mahasiswa</label>
-                            <?php echo toDropDown($jenis_mkss,"id","namamks","Pilih Jenis Mks","","jmks"); ?>
+                            <?php echo displaySearchOpt("Pilih Jenis Mks","id","namamks","jmks",$jenis_mkss); ?>
                         </div>
                         <div class="small-12 columns">
                             <input type="submit" name="perintah" value="cari" />
@@ -257,10 +259,10 @@ function get_hasil_cari()
                 <?php
                     if(isset($_POST['perintah']) && $_POST['perintah'] == 'cari')
                     {
-                        get_hasil_cari();
+                        echo get_hasil_cari();
 
                     } else {
-                        get_table('(js.tanggal , js.jam_mulai ,js.jam_selesai) asc');
+                        echo get_table('(js.tanggal , js.jam_mulai ,js.jam_selesai) asc');
                     }
 //                }
 
@@ -284,64 +286,6 @@ function get_hasil_cari()
         <div class="small-12 columns">
             <div class="row expanded">
                 <table class="hidden" >
-                    <thead>
-                    <tr>
-                        <th>Senin</th>
-                        <th>Selasa</th>
-                        <th>Rabu</th>
-                        <th>Kamis</th>
-                        <th>Jumat</th>
-                        <th>Sabtu</th>
-                        <th>Minggu</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>6</td>
-                        <td>7</td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>9</td>
-                        <td>10</td>
-                        <td>11</td>
-                        <td>12</td>
-                        <td>13</td>
-                        <td>14</td>
-                    </tr>
-                    <tr>
-                        <td>15</td>
-                        <td>16</td>
-                        <td>17</td>
-                        <td>18</td>
-                        <td>19</td>
-                        <td>20</td>
-                        <td>21</td>
-                    </tr>
-                    <tr>
-                        <td>22</td>
-                        <td>23</td>
-                        <td>24</td>
-                        <td>25</td>
-                        <td>26</td>
-                        <td>27</td>
-                        <td>28</td>
-                    </tr>
-                    <tr>
-                        <td>29</td>
-                        <td>30</td>
-                        <td>31</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                    </tr>
-                    </tbody>
                 </table>
             </div>
         </div>

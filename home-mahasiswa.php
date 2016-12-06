@@ -13,6 +13,7 @@ require_once 'database.php';
 
 function get_content($npm)
 {
+	$display = '';
 	$connection = new database();
 	$conn = $connection->connectDB();
 
@@ -23,7 +24,7 @@ function get_content($npm)
 		$hasil->execute(array(':npm' => $npm));
 		while($hasil_row = $hasil->fetch(PDO::FETCH_ASSOC))
 		{
-			echo '
+			$display .= '
 			<table>
 				<tbody>
 					<tr>
@@ -45,31 +46,31 @@ function get_content($npm)
 			$query2 = "Select d.nama from sisidang.dosen_pembimbing dp , sisidang.dosen d where dp.nipdosenpembimbing = d.nip and dp.idmks = $mks_id";
 			$hasil2 = $conn->prepare($query2);
 			$hasil2->execute();
-			echo '<td>';
+			$display .= '<td>';
 			$i = $hasil->rowCount();
 			while($hasil2_row = $hasil2->fetch(PDO::FETCH_ASSOC))
 			{
 				--$i;
 				if($i < 0)
 				{
-					echo $hasil2_row['nama'];
+					$display .= $hasil2_row['nama'];
 				} else {
-					echo $hasil2_row['nama'] . ", ";
+					$display .= $hasil2_row['nama'] . ", ";
 				}
 
 			}
 
-			echo "<strong> Status: </strong>";
+			$display .= "<strong> Status: </strong>";
 
 			if($hasil_row['ijinmajusidang'] == true)
 			{
-				echo "Izin Maju Sidang, ";
+				$display .= "Izin Maju Sidang, ";
 			}
 			if($hasil_row['pengumpulanhardcopy'] == true)
 			{
-				echo "Kumpul Hard Copy";
+				$display .= "Kumpul Hard Copy";
 			}
-			echo '</td>
+			$display .= '</td>
 					</tr>
 						<tr>
 							<th>Dosen Penguji</th>
@@ -77,17 +78,19 @@ function get_content($npm)
 			$query3 = "Select d.nama from sisidang.dosen_penguji dp , sisidang.dosen d where dp.nipdosenpenguji = d.nip and dp.idmks = $mks_id";
 			$hasil3 = $conn->prepare($query3);
 			$hasil3->execute();
-			echo '<td><ul>';
+			$display .= '<td><ul>';
 			while ($hasil3_row = $hasil3->fetch(PDO::FETCH_ASSOC))
 			{
-				echo '<li>'.$hasil3_row['nama'].'</li>';
+				$display .= '<li>'.$hasil3_row['nama'].'</li>';
 			}
-			echo '
+			$display .= '
 						</ul></td>
 						</tr>
 						</tbody>
 					</table>';
 		}
+
+		return $display;
 	} catch (PDOException $e){
 		echo $e->getMessage();
 	}
@@ -98,7 +101,7 @@ function get_content($npm)
 <html>
 <head>
 	<title>SiSidang</title>
-	  <?php include_once 'favicon.php'; ?>
+	<?php include_once 'favicon.php'; ?>
 	<link rel="stylesheet" href="assets/css/vendor.css" />
 	<link rel="stylesheet" href="assets/css/app.css" />
 	<link rel="stylesheet" href="assets/css/jquery.dataTables.min.css"/>
@@ -108,13 +111,13 @@ function get_content($npm)
 <body>
 <?php include_once 'header.php';?>
 <div class="row homePage">
-<div class="small-12 columns adminHome">
-	<h1 class="subtitle">Mahasiswa</h1>
-	<div class="row expanded">
-				<div class="small-12 columns">
-					<h1 class="subtitle">Daftar Jadwal Sidang (mahasiswa)</h1>
-					<?php get_content($npm) ?>
-				</div>
+	<div class="small-12 columns adminHome">
+		<h1 class="subtitle">Mahasiswa</h1>
+		<div class="row expanded">
+			<div class="small-12 columns">
+				<h1 class="subtitle">Daftar Jadwal Sidang (mahasiswa)</h1>
+				<?php echo get_content($npm); ?>
+			</div>
 		</div>
 	</div>
 </div>

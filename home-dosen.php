@@ -14,11 +14,12 @@ require_once 'database.php';
 function get_table($nip , $order)
 {
 
-	$connection = new database();
-	$conn = $connection->connectDB();
-	try {
+    $display = '';
+    $connection = new database();
+    $conn = $connection->connectDB();
+    try {
 
-	    $query = "SELECT DISTINCT mks.idmks,mks.ijinmajusidang , mks.pengumpulanhardcopy , mhs.nama, j.namamks , mks.judul , js.tanggal , js.jam_mulai , js.jam_selesai , r.namaruangan from sisidang.mata_kuliah_spesial mks inner join sisidang.mahasiswa mhs on mhs.npm =  mks.npm inner join sisidang.jadwal_sidang js on js.idmks = mks.idmks inner join sisidang.jenismks j on j.id = mks.idjenismks INNER JOIN sisidang.ruangan r  on r.idruangan = js.idruangan left outer join sisidang.dosen_pembimbing dpem on dpem.idmks = mks.idmks left outer join sisidang.dosen_penguji dp on dp.idmks = mks.idmks where dpem.nipdosenpembimbing =:nip or dp.nipdosenpenguji =:nip ORDER by $order;";
+        $query = "SELECT DISTINCT mks.idmks,mks.ijinmajusidang , mks.pengumpulanhardcopy , mhs.nama, j.namamks , mks.judul , js.tanggal , js.jam_mulai , js.jam_selesai , r.namaruangan from sisidang.mata_kuliah_spesial mks inner join sisidang.mahasiswa mhs on mhs.npm =  mks.npm inner join sisidang.jadwal_sidang js on js.idmks = mks.idmks inner join sisidang.jenismks j on j.id = mks.idjenismks INNER JOIN sisidang.ruangan r  on r.idruangan = js.idruangan left outer join sisidang.dosen_pembimbing dpem on dpem.idmks = mks.idmks left outer join sisidang.dosen_penguji dp on dp.idmks = mks.idmks where dpem.nipdosenpembimbing =:nip or dp.nipdosenpenguji =:nip ORDER by $order;";
         //$query = "select distinct mks.ijinmajusidang ,mks.pengumpulanhardcopy ,mhs.nama ,j.namamks , mks.judul , js.tanggal ,js.jam_mulai ,js.jam_selesai ,dp.nipdosenpenguji ,dpem.nipdosenpembimbing ,mks.idmks ,r.namaruangan from sisidang.mata_kuliah_spesial mks inner join sisidang.mahasiswa mhs on mhs.npm = mks.npm inner join sisidang.jadwal_sidang js on js.idmks = mks.idmks inner join sisidang.jenismks j on j.id = mks.idjenismks inner join sisidang.ruangan r on r.idruangan = js.idruangan left outer join sisidang.dosen_pembimbing dpem on dpem.idmks = mks.idmks left outer join sisidang.dosen_penguji dp on dp.idmks = mks.idmks WHERE mks.issiapsidang = true and dp.nipdosenpenguji =:nip OR dpem.nipdosenpembimbing =:nip order by $order";
         /*
         $query  = "SELECT DISTINCT mks.ijinmajusidang ,mks.pengumpulanhardcopy ,mhs.nama ,j.namamks , mks.judul , js.tanggal ,js.jam_mulai ,js.jam_selesai ,dp.nipdosenpenguji ,dpem.nipdosenpembimbing ,mks.idmks ,r.namaruangan
@@ -32,7 +33,7 @@ ORDER BY $order";
 
         while($hasil_row = $hasil->fetch(PDO::FETCH_ASSOC)) {
 
-            echo '<tr>
+            $display .= '<tr>
                     <td>' . $hasil_row['nama'] . '</td>
                     <td>' . $hasil_row['namamks'] . '<br>
                 Sebagai: ';
@@ -42,7 +43,7 @@ ORDER BY $order";
             $hasil2->execute(array(':nip' => $nip));
             $hasil2_row = $hasil2->fetch(PDO::FETCH_ASSOC);
             if($hasil2_row['hasil'] > 0){
-                echo 'Dosen Pembimbing <br>';
+                $display .= 'Dosen Pembimbing <br>';
             }
             $query3 = "Select count(*) as hasil from sisidang.dosen_penguji dp where dp.idmks = $mks_id and dp.nipdosenpenguji =:nip ";
             $hasil3 = $conn->prepare($query3);
@@ -50,12 +51,12 @@ ORDER BY $order";
             $hasil3_row = $hasil3->fetch(PDO::FETCH_ASSOC);
             if($hasil3_row['hasil'] > 0)
             {
-                echo 'Dosen Penguji';
+                $display .= 'Dosen Penguji';
             }
 
-            echo '</td>
+            $display .= '</td>
             <td>'.$hasil_row['judul'].'</td>';
-            echo '
+            $display .='
                     <td>'.$hasil_row['tanggal'].'<br>
                     '.$hasil_row['jam_mulai'].'-'.$hasil_row['jam_selesai'].'<br>
                     Ruangan: '.$hasil_row['namaruangan'].'
@@ -65,24 +66,24 @@ ORDER BY $order";
             $query4 = "select d.nip ,  d.nama as nama from sisidang.dosen_pembimbing dp , sisidang.dosen d where dp.nipdosenpembimbing = d.nip and dp.idmks = $mks_id";
             $hasil4 = $conn->prepare($query4);
             $hasil4->execute();
-            echo '<td>';
+            $display .= '<td>';
             while($hasil4_row = $hasil4->fetch(PDO::FETCH_ASSOC))
             {
                 if($nip === $hasil4_row['nip'])
                 {
 
                 } else {
-                    echo $hasil4_row['nama'] . '<br>';
+                    $display .= $hasil4_row['nama'] . '<br>';
                 }
             }
 
 
-            echo '</td>';
+            $display .= '</td>';
 
             $query5 = "select d.nip ,  d.nama as nama from sisidang.dosen_penguji dp , sisidang.dosen d where dp.nipdosenpenguji = d.nip and dp.idmks = $mks_id";
             $hasil5 = $conn->prepare($query5);
             $hasil5->execute();
-            echo '<td>';
+            $display .= '<td>';
             while($hasil5_row = $hasil5->fetch(PDO::FETCH_ASSOC))
             {
 
@@ -90,39 +91,40 @@ ORDER BY $order";
                 {
 
                 } else {
-                    echo $hasil5_row['nama'] . '<br>';
+                    $display .= $hasil5_row['nama'] . '<br>';
                 }
             }
 
-            echo '<td><ul>';
+            $display .= '<td><ul>';
 
             if($hasil_row['ijinmajusidang'] == true)
             {
-                echo '<li>Izin Masuk Sidang</li>';
+                $display .='<li>Izin Masuk Sidang</li>';
             }
             if($hasil_row['pengumpulanhardcopy'] == true)
             {
-                echo '<li>Kumpul Hard Copy</li>';
+                $display .='<li>Kumpul Hard Copy</li>';
             }
 
-            echo '</ul></td>';
+            $display .= '</ul></td>';
 
 
-            echo '</td>';
+            $display .= '</td>';
 
-            if($hasil_row)
 
-            echo '</tr>';
+            $display .= '</tr>';
         }
-	} catch (PDOException $e){
-		echo $e->getMessage();
-	}
+
+        return $display;
+    } catch (PDOException $e){
+        echo $e->getMessage();
+    }
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-  <?php include_once 'favicon.php'; ?>
+    <?php include_once 'favicon.php'; ?>
     <title>SiSidang</title>
     <link rel="stylesheet" href="assets/css/vendor.css" />
     <link rel="stylesheet" href="assets/css/app.css" />
@@ -134,62 +136,62 @@ ORDER BY $order";
 <body>
 <?php include_once 'header.php';?>
 <div class="row homePage">
-<div class="small-12 columns adminHome">
-	<h1 class="subtitle">Dosen</h1>
-	<div class="row expanded">
-		<div class="small-12 columns">
-			<h1 class="subtitle">Daftar Jadwal Sidang</h1>
-			<button class="addScheduleButton" id="admAddScheduleButton">Tambah</button>
-<!--            <h4>Sort By:</h4><a id="jenis_sidang">{Jenis Sidang}</a>,<a id="mahasiswa">{Mahasiswa}</a>,<a id="waktu">{Waktu}</a>-->
-			<table  id="jadwal_sidang" class="display">
-				<thead>
-				<tr>
-					<th>Mahasiswa</th>
-					<th>Jenis Sidang</th>
-					<th>Judul</th>
-					<th>Waktu Lokasi</th>
-                    <th>Pembimbing Lain</th>
-					<th>Penguji Lain</th>
-					<th>Status</th>
-				</tr>
-				</thead>
-				<tbody>
-				<?php
-//                if ($_SERVER['REQUEST_METHOD'] === 'POST')
-//                {
-//                    if (!empty($_POST['command']) && $_POST['command'] === 'jenis_sidang')
-//                    {
-//                        get_table($nip_dosen,'j.namamks asc');
-//                    } elseif(!empty($_POST['command']) && $_POST['command'] === 'mahasiswa')
-//                    {
-//                        get_table($nip_dosen,'mhs.nama asc');
-//                    } elseif(!empty($_POST['command']) && $_POST['command'] === 'waktu')
-//                    {
-//                        get_table($nip_dosen,'js.jam_mulai asc,js.jam_selesai asc');
-//                    }
-//                } else {
-                    get_table($nip_dosen,'js.tanggal asc , js.jam_mulai asc ,js.jam_selesai asc');
-//                }
+    <div class="small-12 columns adminHome">
+        <h1 class="subtitle">Dosen</h1>
+        <div class="row expanded">
+            <div class="small-12 columns">
+                <h1 class="subtitle">Daftar Jadwal Sidang</h1>
+                <button class="addScheduleButton" id="admAddScheduleButton">Tambah</button>
+                <!--            <h4>Sort By:</h4><a id="jenis_sidang">{Jenis Sidang}</a>,<a id="mahasiswa">{Mahasiswa}</a>,<a id="waktu">{Waktu}</a>-->
+                <table  id="jadwal_sidang" class="display">
+                    <thead>
+                    <tr>
+                        <th>Mahasiswa</th>
+                        <th>Jenis Sidang</th>
+                        <th>Judul</th>
+                        <th>Waktu Lokasi</th>
+                        <th>Pembimbing Lain</th>
+                        <th>Penguji Lain</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    //                if ($_SERVER['REQUEST_METHOD'] === 'POST')
+                    //                {
+                    //                    if (!empty($_POST['command']) && $_POST['command'] === 'jenis_sidang')
+                    //                    {
+                    //                        get_table($nip_dosen,'j.namamks asc');
+                    //                    } elseif(!empty($_POST['command']) && $_POST['command'] === 'mahasiswa')
+                    //                    {
+                    //                        get_table($nip_dosen,'mhs.nama asc');
+                    //                    } elseif(!empty($_POST['command']) && $_POST['command'] === 'waktu')
+                    //                    {
+                    //                        get_table($nip_dosen,'js.jam_mulai asc,js.jam_selesai asc');
+                    //                    }
+                    //                } else {
+                    echo get_table($nip_dosen,'js.tanggal asc , js.jam_mulai asc ,js.jam_selesai asc');
+                    //                }
 
-                ?>
-				</tbody>
-			</table>
-		</div>
-<!--        <form method="post" action="home-dosen.php">-->
-<!--            <input type="hidden" name="command" value="jenis_sidang">-->
-<!--            <button type="submit" class="hidden" id="sort_js">Kece</button>-->
-<!--        </form>-->
-<!--        <form method="post" action="home-dosen.php">-->
-<!--            <input type="hidden" name="command" value="mahasiswa">-->
-<!--            <button type="submit" class="hidden" id="sort_mhs">Kece</button>-->
-<!--        </form>-->
-<!--        <form method="post" action="home-dosen.php">-->
-<!--            <input type="hidden" name="command" value="waktu">-->
-<!--            <button type="submit" class="hidden" id="sort_waktu">Kece</button>-->
-        </form>
-		<!-- Datepicker -->
-	</div>
-</div>
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+            <!--        <form method="post" action="home-dosen.php">-->
+            <!--            <input type="hidden" name="command" value="jenis_sidang">-->
+            <!--            <button type="submit" class="hidden" id="sort_js">Kece</button>-->
+            <!--        </form>-->
+            <!--        <form method="post" action="home-dosen.php">-->
+            <!--            <input type="hidden" name="command" value="mahasiswa">-->
+            <!--            <button type="submit" class="hidden" id="sort_mhs">Kece</button>-->
+            <!--        </form>-->
+            <!--        <form method="post" action="home-dosen.php">-->
+            <!--            <input type="hidden" name="command" value="waktu">-->
+            <!--            <button type="submit" class="hidden" id="sort_waktu">Kece</button>-->
+            </form>
+            <!-- Datepicker -->
+        </div>
+    </div>
 
     <div id='calendar'></div>
 

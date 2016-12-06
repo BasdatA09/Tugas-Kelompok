@@ -20,6 +20,7 @@ require_once 'database.php';
 function get_table($nip , $order)
 {
 
+    $display = '';
     $connection = new database();
     $conn = $connection->connectDB();
     try {
@@ -32,13 +33,13 @@ ORDER BY $order";
         */
         $hasil = $conn->prepare($query);
         $hasil->execute(array(':nip' => $nip));
-        echo "kenapo iki";
+
 
         while($hasil_row = $hasil->fetch(PDO::FETCH_ASSOC)) {
 
-            echo '<tr>
+            $display .= '<tr>
                     <td>' . $hasil_row['nama'] . '</td>
-                    <td>' . $hasil_row['namamks'] . '<br>
+                    <td>' . $hasil_row['namamks'] . '<br>        
                 Sebagai: ';
             $mks_id = $hasil_row['idmks'];
             $query2 = "Select count(*) as hasil from sisidang.dosen_pembimbing dp where dp.idmks = $mks_id and dp.nipdosenpembimbing =:nip";
@@ -46,7 +47,7 @@ ORDER BY $order";
             $hasil2->execute(array(':nip' => $nip));
             $hasil2_row = $hasil2->fetch(PDO::FETCH_ASSOC);
             if($hasil2_row['hasil'] > 0){
-                echo 'Dosen Pembimbing <br>';
+                $display .=  'Dosen Pembimbing <br>';
             }
             $query3 = "Select count(*) as hasil from sisidang.dosen_penguji dp where dp.idmks = $mks_id and dp.nipdosenpenguji =:nip ";
             $hasil3 = $conn->prepare($query3);
@@ -54,39 +55,39 @@ ORDER BY $order";
             $hasil3_row = $hasil3->fetch(PDO::FETCH_ASSOC);
             if($hasil3_row['hasil'] > 0)
             {
-                echo 'Dosen Penguji';
+                $display .=  'Dosen Penguji';
             }
 
-            echo '</td>
+            $display .=  '</td> 
             <td>'.$hasil_row['judul'].'</td>';
-            echo '
+            $display .= '
                     <td>'.$hasil_row['tanggal'].'<br>
                     '.$hasil_row['jam_mulai'].'-'.$hasil_row['jam_selesai'].'<br>
                     Ruangan: '.$hasil_row['namaruangan'].'
-                    </td>
+                    </td>         
                 ';
 
             $query4 = "select d.nip ,  d.nama as nama from sisidang.dosen_pembimbing dp , sisidang.dosen d where dp.nipdosenpembimbing = d.nip and dp.idmks = $mks_id";
             $hasil4 = $conn->prepare($query4);
             $hasil4->execute();
-            echo '<td>';
+            $display .=  '<td>';
             while($hasil4_row = $hasil4->fetch(PDO::FETCH_ASSOC))
             {
                 if($nip === $hasil4_row['nip'])
                 {
 
                 } else {
-                    echo $hasil4_row['nama'] . '<br>';
+                    $display .=  $hasil4_row['nama'] . '<br>';
                 }
             }
 
 
-            echo '</td>';
+            $display .=  '</td>';
 
             $query5 = "select d.nip ,  d.nama as nama from sisidang.dosen_penguji dp , sisidang.dosen d where dp.nipdosenpenguji = d.nip and dp.idmks = $mks_id";
             $hasil5 = $conn->prepare($query5);
             $hasil5->execute();
-            echo '<td>';
+            $display .=  '<td>';
             while($hasil5_row = $hasil5->fetch(PDO::FETCH_ASSOC))
             {
 
@@ -94,30 +95,32 @@ ORDER BY $order";
                 {
 
                 } else {
-                    echo $hasil5_row['nama'] . '<br>';
+                    $display .=  $hasil5_row['nama'] . '<br>';
                 }
             }
 
-            echo '<td><ul>';
+            $display .=  '<td><ul>';
 
             if($hasil_row['ijinmajusidang'] == true)
             {
-                echo '<li>Izin Masuk Sidang</li>';
+                $display .=  '<li>Izin Masuk Sidang</li>';
             }
             if($hasil_row['pengumpulanhardcopy'] == true)
             {
-                echo '<li>Kumpul Hard Copy</li>';
+                $display .= '<li>Kumpul Hard Copy</li>';
             }
 
-            echo '</ul></td>';
+            $display .=  '</ul></td>';
 
 
-            echo '</td>';
+            $display .=  '</td>';
 
             if($hasil_row)
 
-                echo '</tr>';
+                $display .=  '</tr>';
         }
+
+        return $display;
     } catch (PDOException $e){
         echo $e->getMessage();
     }
@@ -127,7 +130,6 @@ ORDER BY $order";
 <html>
 <head>
     <title>SiSidang</title>
-      <?php include_once 'favicon.php'; ?>
     <link rel="stylesheet" href="assets/css/vendor.css" />
     <link rel="stylesheet" href="assets/css/app.css" />
     <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css"/>
@@ -187,23 +189,23 @@ ORDER BY $order";
                     if(isset($_SESSION["mks_order"])){
                         $sort=$_SESSION["mks_order"];
                     }
-                    get_table($nip_dosen,$sort);
+                    echo get_table($nip_dosen,$sort);
                     ?>
                     </tbody>
                 </table>
             </div>
-<!--            <form method="post" action="lihat-jadwal-sidang-dosen.php">-->
-<!--                <input type="hidden" name="command" value="jenis_sidang">-->
-<!--                <button type="submit" class="hidden" id="sort_js">Kece</button>-->
-<!--            </form>-->
-<!--            <form method="post" action="lihat-jadwal-sidang-dosen.php">-->
-<!--                <input type="hidden" name="command" value="mahasiswa">-->
-<!--                <button type="submit" class="hidden" id="sort_mhs">Kece</button>-->
-<!--            </form>-->
-<!--            <form method="post" action="lihat-jadwal-sidang-dosen.php">-->
-<!--                <input type="hidden" name="command" value="waktu">-->
-<!--                <button type="submit" class="hidden" id="sort_waktu">Kece</button>-->
-<!--            </form>-->
+            <!--            <form method="post" action="lihat-jadwal-sidang-dosen.php">-->
+            <!--                <input type="hidden" name="command" value="jenis_sidang">-->
+            <!--                <button type="submit" class="hidden" id="sort_js">Kece</button>-->
+            <!--            </form>-->
+            <!--            <form method="post" action="lihat-jadwal-sidang-dosen.php">-->
+            <!--                <input type="hidden" name="command" value="mahasiswa">-->
+            <!--                <button type="submit" class="hidden" id="sort_mhs">Kece</button>-->
+            <!--            </form>-->
+            <!--            <form method="post" action="lihat-jadwal-sidang-dosen.php">-->
+            <!--                <input type="hidden" name="command" value="waktu">-->
+            <!--                <button type="submit" class="hidden" id="sort_waktu">Kece</button>-->
+            <!--            </form>-->
             <!-- Datepicker -->
             <div class="small-12 columns">
                 <div class="row expanded">
