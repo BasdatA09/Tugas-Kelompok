@@ -23,7 +23,7 @@ function get_table($order)
     $connection = new database();
     $conn = $connection->connectDB();
     try{
-        $query = "SELECT mks.idmks as id_mks , J.NamaMKS as nama_mks , M.Nama as nama_mhs , MKS.Judul as judul_mks , JS.tanggal as tgl , JS.jam_mulai as jam_mulai , JS.jam_selesai as jam_selesai , r.namaruangan as nama_ruangan from sisidang.mata_kuliah_spesial mks inner join sisidang.mahasiswa m on mks.npm = m.npm inner join sisidang.jadwal_sidang js on js.idmks = mks.idmks inner join sisidang.jenismks j on j.id = mks.idjenismks inner join sisidang.ruangan r on js.idruangan = r.idruangan and mks.issiapsidang = true order by $order";
+        $query = "SELECT js.idjadwal as idjadwal, mks.idmks as id_mks , J.NamaMKS as nama_mks , M.Nama as nama_mhs , MKS.Judul as judul_mks , JS.tanggal as tgl , JS.jam_mulai as jam_mulai , JS.jam_selesai as jam_selesai , r.namaruangan as nama_ruangan from sisidang.mata_kuliah_spesial mks inner join sisidang.mahasiswa m on mks.npm = m.npm inner join sisidang.jadwal_sidang js on js.idmks = mks.idmks inner join sisidang.jenismks j on j.id = mks.idjenismks inner join sisidang.ruangan r on js.idruangan = r.idruangan and mks.issiapsidang = true order by $order";
         //$query = "SELECT mks.idmks as id_mks, J.NamaMKS as nama_mks , M.Nama as nama_mhs, MKS.Judul as judul_mks, JS.Tanggal as tgl , JS.jam_mulai as jam_mulai , JS.jam_selesai as jam_selesai , r.namaruangan as nama_ruangan  FROM sisidang.Mata_Kuliah_Spesial mks , sisidang.Jenismks J , sisidang.Jadwal_sidang js  , sisidang.mahasiswa m , sisidang.ruangan r where m.npm = mks.npm and mks.idjenismks = j.ID and js.idmks = mks.idmks and js.idruangan = r.idruangan and mks.issiapsidang = true order by $order ";
         $hasil = $conn->prepare($query);
         $hasil->execute();
@@ -64,7 +64,9 @@ function get_table($order)
                     Ruangan: '.$hasil_row['nama_ruangan'].'
                     </td>
                 ';
-            $display .= '<td><a href="ubah-jadwal-sidang.php">Edit</a></td>';
+            $display .= '<td><form action="ubah-jadwal-sidang.php" method="post" accept-charset="utf-8">
+                    <input type="hidden" name = "idjadwal" value = "'.$hasil_row['idjadwal'].'">
+                    <input type="submit" value = "edit"></form><td>';
             $display .=  '</tr>';
         }
 

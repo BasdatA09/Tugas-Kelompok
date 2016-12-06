@@ -96,7 +96,8 @@ function get_table($order)
 				$('#daftarMKS').DataTable({
 					ordering:false,
 					paging:true,
-					info:false});
+					info:false,
+					bFilter:false});
 				$("#admAddScheduleButton").click(function () {
 					window.location.href ="tambah-mks.php";
 				});

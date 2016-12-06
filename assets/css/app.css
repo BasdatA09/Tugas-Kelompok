@@ -87,6 +87,7 @@ nav .burger {
 nav .burger .burgerContent {
     position: absolute;
     top: 1.5rem;
+    z-index: 99;
     right: 0;
     display: none;
     width: 15rem;
